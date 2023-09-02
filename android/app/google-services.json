@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "199827803463",
+    "project_id": "phonex-43d8c",
+    "storage_bucket": "phonex-43d8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199827803463:android:53ed924fc98d2f9406d062",
+        "android_client_info": {
+          "package_name": "com.phonoi.phonoi_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199827803463-3j2f2jkand4joqt8b44k3m92a2p2fid3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3NPTqylwG8hIOLlsWew_gpLX6PEV56jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199827803463-3j2f2jkand4joqt8b44k3m92a2p2fid3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "199827803463-lb61jc3lljsothgru75gdaf8ols874uj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "phonoiazaicompany.com.phonoi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199827803463:android:4c82d04e6dcc8c0606d062",
+        "android_client_info": {
+          "package_name": "phonoi_azai_company.com.phonoi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199827803463-2huemq00qigfq94v3tvmvebp5nb68sm9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "phonoi_azai_company.com.phonoi",
+            "certificate_hash": "7c314e4107f76b1af8cb695263e3a10af5f61e73"
+          }
+        },
+        {
+          "client_id": "199827803463-3j2f2jkand4joqt8b44k3m92a2p2fid3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3NPTqylwG8hIOLlsWew_gpLX6PEV56jk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199827803463-3j2f2jkand4joqt8b44k3m92a2p2fid3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "199827803463-lb61jc3lljsothgru75gdaf8ols874uj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "phonoiazaicompany.com.phonoi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

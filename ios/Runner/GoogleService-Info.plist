@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>199827803463-pdpf1ftpk8snd4q58gvciv988qij0n4l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.199827803463-pdpf1ftpk8snd4q58gvciv988qij0n4l</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>199827803463-2huemq00qigfq94v3tvmvebp5nb68sm9.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByw0k8T3G_umM5Cp65pqFXeLRbSoLFnqk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>199827803463</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.phonoi.phonoiApp</string>
+	<key>PROJECT_ID</key>
+	<string>phonex-43d8c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>phonex-43d8c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:199827803463:ios:17ac4b558855654406d062</string>
+</dict>
+</plist>
