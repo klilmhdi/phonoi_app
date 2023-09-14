@@ -1,7 +1,7 @@
 part of 'add_link_cubit.dart';
 
 @immutable
-class AddLinkState {
+class AddLinkState extends Equatable {
   final TextEditingController controller;
   final double progressValue;
   final bool isDownloading;
@@ -71,4 +71,19 @@ class AddLinkState {
       fileType: fileType ?? this.fileType,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        controller,
+        progressValue,
+        isDownloading,
+        qualities,
+        video,
+        isLoading,
+        selectedQualityIndex,
+        fileName,
+        isSearching,
+        videoType,
+        fileType,
+      ];
 }

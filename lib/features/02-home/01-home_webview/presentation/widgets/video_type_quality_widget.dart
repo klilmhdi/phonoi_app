@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/enums/video_types.dart';
-import '../../../../core/utils/colors/colors.dart';
-import '../models/video_downloaded_model.dart';
+import '../../../../../core/enums/video_types.dart';
+import '../../../../../core/utils/colors/colors.dart';
+import '../../data/models/video_downloaded_model.dart';
 
 class VideoQualityCard extends StatelessWidget {
   final VideoQualityModel model;
@@ -102,7 +100,7 @@ class VideoQualityCard extends StatelessWidget {
               (type == VideoType.youtube || type == VideoType.twitter || type == VideoType.tiktok)
                   ? "${_qualityValue}P"
                   : _quality!,
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: 20,
                 color: CustomColors.white,
                 fontWeight: FontWeight.w600,

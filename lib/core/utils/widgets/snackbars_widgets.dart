@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../colors/colors.dart';
 
@@ -66,7 +65,7 @@ showErrorSnackBar(String title, int duration, BuildContext context) => ScaffoldM
           borderRadius: BorderRadius.circular(12.w),
         ),
         margin: EdgeInsets.all(15.w),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
         content: Row(
           children: [
@@ -94,35 +93,35 @@ showErrorSnackBar(String title, int duration, BuildContext context) => ScaffoldM
     );
 
 showSnackBar(String title, int duration, BuildContext context) => ScaffoldMessenger.of(context).showSnackBar(
-  SnackBar(
-    duration: Duration(seconds: duration),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12.w),
-    ),
-    margin: EdgeInsets.all(15.w),
-    backgroundColor: Colors.deepPurple,
-    behavior: SnackBarBehavior.floating,
-    content: Row(
-      children: [
-        Icon(
-          Icons.info_outline,
-          color: CustomColors.white,
-          size: 30.w,
+      SnackBar(
+        duration: Duration(seconds: duration),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.w),
         ),
-        SizedBox(width: 10.w),
-        Expanded(
-          child: Text(
-            title,
-            maxLines: 2,
-            overflow: TextOverflow.fade,
-            style: TextStyle(
-              fontSize: 18,
+        margin: EdgeInsets.all(15.w),
+        backgroundColor: Colors.deepPurple,
+        behavior: SnackBarBehavior.floating,
+        content: Row(
+          children: [
+            Icon(
+              Icons.info_outline,
               color: CustomColors.white,
-              fontWeight: FontWeight.w500,
+              size: 30.w,
             ),
-          ),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.fade,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: CustomColors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  ),
-);
+      ),
+    );

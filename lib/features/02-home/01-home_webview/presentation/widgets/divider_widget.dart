@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-Widget buildDivider() => Column(
+import '../../../../../generated/l10n.dart';
+
+Widget buildDivider(context) => Column(
       children: [
         SizedBox(
           height: 17,
@@ -15,7 +17,7 @@ Widget buildDivider() => Column(
             width: 16.0,
           ),
           Text(
-            "أو",
+            S.of(context).or,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(

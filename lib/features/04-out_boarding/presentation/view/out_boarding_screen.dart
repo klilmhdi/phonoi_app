@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phonoi_app/core/utils/functions/functions.dart';
 import 'package:phonoi_app/features/02-home/0-layout/view/layout.dart';
 
+import '../../../../generated/l10n.dart';
 import '../widgets/out_boarding_page.dart';
 
 class OutBoardingScreen extends StatefulWidget {
@@ -31,151 +32,113 @@ class _OutBoardingScreenState extends State<OutBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 170.h,
-              width: 170.w,
-              child: Image.asset('assets/icons/logo.png'),
-            ),
-            Container(
-              height: 149.h,
-              width: 346.w,
-              decoration: BoxDecoration(
-                color: const Color(0xff8C52FF),
-                borderRadius: BorderRadius.circular(16),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 120.h,
+                width: 160.w,
+                child: Image.asset('assets/app_icons/phonx.png'),
               ),
-              child: PageView(
-                physics: const BouncingScrollPhysics(),
-                controller: _pageController,
-                onPageChanged: (int value) {
-                  setState(() {
-                    _pageIndex = value;
-                  });
-                },
-                children: [
-                  OutBoardingPage(
-                    text: "تحميل أي فيديو أو\n فيلم من أي مكان \n بكل سهولة",
-                    pageIndex: _pageIndex,
-                    pageController: _pageController,
-                  ),
-                  OutBoardingPage(
-                    text: "تحميل المسلسلات \n والأفلام بجودة عالية",
-                    pageIndex: _pageIndex,
-                    pageController: _pageController,
-                  ),
-                  OutBoardingPage(
-                    text: "تحميل من جميع \n مواقع التواصل \n الأجتماعي",
-                    pageIndex: _pageIndex,
-                    pageController: _pageController,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TabPageSelectorIndicator(
-                  backgroundColor: _pageIndex == 0 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
-                  borderColor: Colors.transparent,
-                  size: 10.sp,
+              Container(
+                height: 149.h,
+                width: 346.w,
+                decoration: BoxDecoration(
+                  color: const Color(0xff8C52FF),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                SizedBox(width: 5.w),
-                TabPageSelectorIndicator(
-                  backgroundColor: _pageIndex == 1 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
-                  borderColor: Colors.transparent,
-                  size: 10.sp,
-                ),
-                SizedBox(width: 5.w),
-                TabPageSelectorIndicator(
-                  backgroundColor: _pageIndex == 2 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
-                  borderColor: Colors.transparent,
-                  size: 10.sp,
-                ),
-              ],
-            ),
-            SizedBox(height: 8.h),
-            SizedBox(
-              height: 216.h,
-              width: 216.w,
-              child: Image.asset('assets/icons/tree.png'),
-            ),
-            SizedBox(height: 32.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.w),
-              child: SizedBox(
-                // width: 286.w,
-                child: Text(
-                  "حمل أي فيديو أو أي فيلم من أي مكان على الانترنت \n        بضغطة زر واحدة وبدون اعلانات مزعجة",
-                  style: TextStyle(fontSize: 14.sp),
-                  // textDirection: TextDirection.rtl,
-                ),
-              ),
-            ),
-            SizedBox(height: 30.h),
-            Container(
-              width: 294.w,
-              height: 112.h,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color(0xff7B3FF0),
-                  width: 1.w,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(
-                  start: 28.w,
-                  end: 28.w,
-                  top: 11.h,
-                ),
-                child: Column(
+                child: PageView(
+                  physics: const BouncingScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (int value) {
+                    setState(() {
+                      _pageIndex = value;
+                    });
+                  },
                   children: [
-                    Container(
-                      width: 237.w,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffDCDCDC),
-                        borderRadius: BorderRadius.circular(27),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "تجربة مجانية لمدة 30 يوم \n          ثم 1\$ كل شهر ",
-                          style: TextStyle(fontSize: 13.sp),
-                          // textDirection: TextDirection.rtl,
-                        ),
-                      ),
+                    OutBoardingPage(
+                      text: S.of(context).on_boarding_1,
+                      pageIndex: _pageIndex,
+                      pageController: _pageController,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        navAndFinish(context, Layout());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff8C52FF),
-                        minimumSize: Size(102.w, 28.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      child: Text(
-                        "ابدأ",
-                        style: TextStyle(fontSize: 17.sp),
-                      ),
+                    OutBoardingPage(
+                      text: S.of(context).on_boarding_2,
+                      pageIndex: _pageIndex,
+                      pageController: _pageController,
+                    ),
+                    OutBoardingPage(
+                      text: S.of(context).on_boarding_3,
+                      pageIndex: _pageIndex,
+                      pageController: _pageController,
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 8.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TabPageSelectorIndicator(
+                    backgroundColor: _pageIndex == 0 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
+                    borderColor: Colors.transparent,
+                    size: 10.sp,
+                  ),
+                  SizedBox(width: 5.w),
+                  TabPageSelectorIndicator(
+                    backgroundColor: _pageIndex == 1 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
+                    borderColor: Colors.transparent,
+                    size: 10.sp,
+                  ),
+                  SizedBox(width: 5.w),
+                  TabPageSelectorIndicator(
+                    backgroundColor: _pageIndex == 2 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
+                    borderColor: Colors.transparent,
+                    size: 10.sp,
+                  ),
+                ],
+              ),
+              SizedBox(height: 28.h),
+              SizedBox(
+                height: 216.h,
+                width: 216.w,
+                child: Image.asset('assets/icons/tree.png'),
+              ),
+              SizedBox(height: 32.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.w),
+                child: SizedBox(
+                  child: Text(
+                    S.of(context).desc_on_boarding,
+                    style: TextStyle(fontSize: 12.sp),
+                    // textDirection: TextDirection.rtl,
+                  ),
+                ),
+              ),
+              SizedBox(height: 30.h),
+              ElevatedButton(
+                onPressed: () {
+                  navAndFinish(context, Layout());
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff8C52FF),
+                  minimumSize: Size(96.w, 38.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Text(
+                  S.of(context).start,
+                  style: TextStyle(fontSize: 17.sp, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-//"تحميل المسلسلات \n والأفلام بجودة عالية"
-
-//"تحميل من جميع \n مواقع التواصل \n الأجتماعي"

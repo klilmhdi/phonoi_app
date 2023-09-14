@@ -6,7 +6,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 
-import '../../../features/02-home/1-home_webview/models/video-link_model.dart';
+import '../../../features/02-home/01-home_webview/data/models/video_downloaded_model.dart';
 
 class Extractor {
   static Future<VideoData?> getDirectLink({String link = '', int timeout = 6}) async {

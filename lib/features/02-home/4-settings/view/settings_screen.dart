@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:phonoi_app/core/utils/widgets/dialoges.dart';
-import 'package:phonoi_app/features/02-home/settings/view/setting_page.dart';
+import 'package:phonoi_app/features/02-home/4-settings/view/setting_page.dart';
+import '../../../../core/app-cubit/themes/theme_cubit.dart';
 import '../../../../core/utils/functions/functions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../01-auth/presentation/view/login_screen.dart';
@@ -17,6 +19,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAliveClientMixin {
+  @override
   bool get wantKeepAlive => true;
 
   @override
@@ -48,20 +51,6 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                           ),
                         ),
                       ),
-                      /*
-                                            cubit.user == null
-                          ? Expanded(
-                              flex: 7,
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.only(start: 14, top: 63),
-                                child: Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.deepPurple,
-                                )),
-                              ),
-                            )
-                          :
-                       */
                       cubit.userModel != null
                           ? Expanded(
                               flex: 7,
@@ -73,25 +62,20 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                                   children: [
                                     Text("${S.of(context).hello + ": " + cubit.userModel!.name.toString()}",
                                         style: TextStyle(fontSize: 20)),
-                                    Row(
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () async => cancelLogoutWarningAlert(context, cubit.logout(context)),
-                                          child: Container(
-                                            height: 31,
-                                            width: 119,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xff8C52FF),
-                                                borderRadius: BorderRadius.circular(17)),
-                                            child: Center(
-                                              child: Text(
-                                                S.of(context).log_out,
-                                                style: TextStyle(color: Colors.white),
-                                              ),
-                                            ),
+                                    GestureDetector(
+                                      onTap: () async => cancelLogoutWarningAlert(context, cubit.logout(context)),
+                                      child: Container(
+                                        height: 31,
+                                        width: 119,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xff8C52FF), borderRadius: BorderRadius.circular(17)),
+                                        child: Center(
+                                          child: Text(
+                                            S.of(context).log_out,
+                                            style: TextStyle(color: Colors.white),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -145,84 +129,8 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                             ),
                     ],
                   ),
-                  const SizedBox(height: 37),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              padding: EdgeInsets.zero,
-                              icon: const Icon(
-                                Icons.star,
-                                color: Color(0xffFFA000),
-                              ),
-                              iconSize: 32,
-                            ),
-                            Text(
-                              S.of(context).bookmarks,
-                              style: TextStyle(fontSize: 10),
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              padding: EdgeInsets.zero,
-                              icon: const Icon(
-                                Icons.access_time_filled,
-                                color: Color(0xff8C52FF),
-                              ),
-                              iconSize: 32,
-                            ),
-                            Text(
-                              S.of(context).history,
-                              style: TextStyle(fontSize: 10),
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              padding: EdgeInsets.zero,
-                              icon: const Icon(
-                                Icons.favorite,
-                                color: Color(0xffFF002A),
-                              ),
-                              iconSize: 32,
-                            ),
-                            const Text(
-                              ' الاعجابات',
-                              style: TextStyle(fontSize: 10),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(top: 10),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                height: 30,
-                                child: Icon(Icons.shield_moon, color: Colors.deepPurple, size: 32),
-                              ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                'الاشارات المرجعية',
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(height: 51),
+                  Divider(),
                   ListTile(
                     leading: CircleAvatar(
                         backgroundColor: CupertinoColors.activeBlue,
@@ -253,7 +161,12 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                   ),
                   const SizedBox(height: 30),
                   ListTile(
-                    leading: CircleAvatar(backgroundColor: Colors.deepPurple, child: Icon(Icons.share, color: Colors.white,)),
+                    leading: CircleAvatar(
+                        backgroundColor: Colors.deepPurple,
+                        child: Icon(
+                          FontAwesome.reply,
+                          color: Colors.white,
+                        )),
                     trailing: Icon(
                       Icons.arrow_forward_ios_sharp,
                       color: Color(0xff5D5D5D),
@@ -262,12 +175,30 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                   ),
                   const SizedBox(height: 30),
                   ListTile(
-                    leading: Icon(Icons.support_agent),
+                    leading: CircleAvatar(
+                        backgroundColor: Colors.black87,
+                        child: Icon(
+                          Icons.support_agent,
+                          color: Colors.white,
+                        )),
                     trailing: Icon(
                       Icons.arrow_forward_ios_sharp,
                       color: Color(0xff5D5D5D),
                     ),
                     title: Text(S.of(context).help_center),
+                  ),
+                  const SizedBox(height: 30),
+                  ListTile(
+                    leading:
+                        CircleAvatar(backgroundColor: Colors.deepOrange, child: Icon(Icons.sunny, color: Colors.white)),
+                    title: Text("Change theme"),
+                    trailing: BlocBuilder<ThemeCubit, ThemeState>(
+                      bloc: context.read<ThemeCubit>(),
+                      builder: (context, state) {
+                        return Switch.adaptive(
+                            value: state.isDark, onChanged: (value) => context.read<ThemeCubit>().switchTheme());
+                      },
+                    ),
                   ),
                 ],
               ),

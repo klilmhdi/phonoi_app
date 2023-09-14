@@ -24,9 +24,7 @@ class UserModel extends Equatable {
   @override
   List<Object?> get props => [name, email, phone, uid, videos, createdAt]; // isPaid
 
-  UserModel copyWith({String? name, String? email, String? phone, String? uid, List? videos, Timestamp? createdAt
-      // bool? isPaid,
-      }) {
+  UserModel copyWith({String? name, String? email, String? phone, String? uid, List? videos, Timestamp? createdAt}) {
     return UserModel(
       name: name ?? this.name,
       email: email ?? this.email,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phonoi_app/features/02-home/1-home_webview/widgets/web_view.dart';
+import 'package:phonoi_app/features/02-home/01-home_webview/presentation/widgets/web_view.dart';
 
-import '../../../../generated/l10n.dart';
+import '../../../../../generated/l10n.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

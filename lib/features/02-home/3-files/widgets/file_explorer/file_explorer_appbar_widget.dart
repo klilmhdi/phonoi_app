@@ -123,14 +123,12 @@ createFolder(BuildContext context, controller) async {
               Text("قم بإدخال اسم المجلد"),
               ListTile(
                 title: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder()
-                  ),
+                  decoration: InputDecoration(border: OutlineInputBorder()),
                   controller: folderName,
-                  validator: (String? value){
-                    if(value!.isEmpty){
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
                       return "الرجاء ملء الحقل كاملاً";
-                    }else{
+                    } else {
                       return null;
                     }
                   },

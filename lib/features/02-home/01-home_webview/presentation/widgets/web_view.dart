@@ -12,8 +12,6 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
-  bool _isAddingTab = false;
-
   late InAppWebViewController _webController;
   double _progress = 0;
   TextEditingController _urlController = TextEditingController();
@@ -52,6 +50,7 @@ class _WebViewPageState extends State<WebViewPage> {
                 onSubmitted: (value) {
                   _loadUrl();
                 },
+                style: TextStyle(color: Colors.black87),
                 decoration: InputDecoration(
                   constraints: BoxConstraints(
                     maxHeight: 57.h,
@@ -60,10 +59,7 @@ class _WebViewPageState extends State<WebViewPage> {
                   fillColor: const Color(0xffEBEBEB),
                   filled: true,
                   hintText: "البحث أو كتابة عنوان الويب",
-                  hintStyle: TextStyle(
-                    color: const Color(0xff5D5D5D),
-                    fontSize: 13.sp,
-                  ),
+                  hintStyle: TextStyle(fontSize: 13.sp, color: Colors.black87),
                   prefixIcon: CircleAvatar(
                       backgroundColor: Colors.purple,
                       child: Center(

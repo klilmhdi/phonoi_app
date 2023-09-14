@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import '../../../../core/enums/video_types.dart';
-import '../../../../core/utils/colors/colors.dart';
-import '../../../../core/utils/notification/download_notification.dart';
-import '../models/video_downloaded_model.dart';
-import '../repo/video_downloader_repository.dart';
-import '../widgets/video_type_quality_widget.dart';
+import '../core/enums/video_types.dart';
+import '../core/utils/colors/colors.dart';
+import '../core/utils/notification/download_notification.dart';
+import '../features/02-home/01-home_webview/data/models/video_downloaded_model.dart';
+import '../features/02-home/01-home_webview/domain/repo/video_downloader_repository.dart';
+import '../features/02-home/01-home_webview/presentation/widgets/video_type_quality_widget.dart';
 
 class AddDownloadUrlScreen extends StatefulWidget {
   AddDownloadUrlScreen({super.key, required this.onDownloadCompleted});
@@ -149,7 +148,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                       padding: EdgeInsets.symmetric(vertical: 8.h),
                       child: Text(
                         "اضغظ للصق الرابط ",
-                        style: GoogleFonts.poppins(
+                        style: TextStyle(
                           fontSize: 20,
                           color: Color(0xffFFFFFF),
                           fontWeight: FontWeight.w600,
@@ -188,7 +187,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                       padding: EdgeInsets.symmetric(vertical: 8.h),
                       child: Text(
                         "حذف الرابط",
-                        style: GoogleFonts.poppins(
+                        style: TextStyle(
                           fontSize: 20,
                           color: Color(0xffFFFFFF),
                           fontWeight: FontWeight.w600,
@@ -219,7 +218,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                         : _qualities == null
                             ? Text(
                                 "hmm, this link look too complicated for me or either i dont supported i yet.... can you try another one? ",
-                                style: GoogleFonts.poppins(
+                                style: TextStyle(
                                   fontSize: 20,
                                   color: CustomColors.white,
                                 ),
@@ -249,7 +248,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                                     SizedBox(width: 10.w),
                                     Text(
                                       "Downloading",
-                                      style: GoogleFonts.poppins(
+                                      style: TextStyle(
                                         fontSize: 18,
                                         color: CustomColors.white,
                                         fontWeight: FontWeight.w500,
@@ -260,7 +259,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                                 SizedBox(height: 6.h),
                                 Text(
                                   _fileName.substring(1),
-                                  style: GoogleFonts.poppins(
+                                  style: TextStyle(
                                     fontSize: 18,
                                     color: CustomColors.white,
                                     fontWeight: FontWeight.w300,
@@ -270,7 +269,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                             ),
                             Text(
                               "${_progressVale.toStringAsFixed(0)}%",
-                              style: GoogleFonts.poppins(
+                              style: TextStyle(
                                 fontSize: 20,
                                 color: CustomColors.white,
                                 fontWeight: FontWeight.w600,
@@ -374,7 +373,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                 title,
                 maxLines: 2,
                 overflow: TextOverflow.fade,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: 18,
                   color: CustomColors.white,
                   fontWeight: FontWeight.w500,
@@ -452,7 +451,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
   }
 
   Future<void> _onLinkPasted(String url) async {
-    var _response = await VideoDownloaderRepository().getAvailableVideos(url);
+    var _response = await VideoDownloaderRepository().call(url);
     setState(() => _video = _response);
     if (_video != null) {
       print("************${_video}");
@@ -492,7 +491,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                 children: [
                   Text(
                     "اختر نوع الملف الذي تود تنزيل الرابط به ",
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
                       color: CustomColors.white,
@@ -514,7 +513,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
               ListTile(
                 title: Text(
                   "أغنية (بأعلى جودة)",
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 16,
                     color: CustomColors.white,
                     fontWeight: FontWeight.w300,
@@ -534,7 +533,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
               ListTile(
                 title: Text(
                   "فيديو (أعلى جودة)",
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 16,
                     color: CustomColors.white,
                     fontWeight: FontWeight.w300,
@@ -561,7 +560,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                   SizedBox(width: 10.w),
                   Text(
                     "Downloading from ${_getFilePrefix!}",
-                    style: GoogleFonts.poppins(
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: CustomColors.white,
                       fontSize: 18,
@@ -583,7 +582,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                       _video?.title ?? "",
                       maxLines: 2,
                       overflow: TextOverflow.fade,
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
                         fontSize: 16,
                         color: CustomColors.white,
                         fontWeight: FontWeight.w300,
@@ -622,7 +621,7 @@ class _AddDownloadUrlScreenState extends State<AddDownloadUrlScreen> {
                     child: Text(
                       "Download This Video",
                       textAlign: TextAlign.left,
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
                         color: CustomColors.appBar,
                         fontWeight: FontWeight.w600,
                         fontSize: 20,

@@ -1,14 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:phonoi_app/features/01-auth/controller/auth_controller.dart';
-import 'package:phonoi_app/features/02-home/0-layout/view/layout.dart';
+import 'package:phonoi_app/core/utils/functions/functions.dart';
 
-import '../../../../../core/utils/functions/functions.dart';
 import '../../../../../core/utils/widgets/snackbars_widgets.dart';
+import '../../../../../generated/l10n.dart';
 
 part 'signup_state.dart';
 
@@ -20,10 +17,12 @@ class SignupCubit extends Cubit<SignupState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController phoneCodeController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // sign in with email
-  Future<void> signupViaEmail({
+  Future<void> signupViaEmail(
+    context, {
     required String name,
     required String email,
     required String phone,
@@ -48,92 +47,53 @@ class SignupCubit extends Cubit<SignupState> {
       });
     } on FirebaseAuthException catch (error) {
       print(error.message.toString());
-      errorSnackBar("هذا الإيميل مستخدم بالفعل!!!" + "${error.message.toString()}");
+      showErrorSnackBar("هذا الإيميل مستخدم بالفعل!!!" + "${error.message.toString()}", 4, context);
       emit(ErrorCreateUserState("###########################Error here when create user: " + error.toString()));
     } catch (e) {
       print(e.toString());
-      errorSnackBar(e.toString());
+      showErrorSnackBar(e.toString(), 4, context);
       emit(ErrorCreateUserState("###########################Error here when create user: " + e.toString()));
     }
   }
 
-  // sign in with google account
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String? phoneVerify;
+  String? emailVerify;
+  int timer = 60;
 
-  // Future<void> _goolgeSignIn({required BuildContext context}) async {
-  //   final googleSignIn = GoogleSignIn();
-  //   final googleAccount = await googleSignIn.signIn();
-  //   if (googleAccount != null) {
-  //     final googleAuth = await googleAccount.authentication;
-  //     if (googleAuth.accessToken != null && googleAuth.idToken != null) {
-  //       try {
-  //         final authResults = await FirebaseAuth.instance.signInWithCredential(GoogleAuthProvider.credential(
-  //           accessToken: googleAuth.accessToken,
-  //           idToken: googleAuth.idToken,
-  //         ));
-  //         if (authResults.additionalUserInfo!.isNewUser) {
-  //           FirebaseFirestore.instance.collection("users").doc(uid).set({
-  //             'name': name,
-  //             'email': email,
-  //             'phone': phone,
-  //             'uid': uid,
-  //             'videos': [],
-  //             'createdAt': Timestamp.now(),
-  //           });
-  //         }
-  //         WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //           Navigator.pushReplacementNamed(context, RootScreen.routName);
-  //         });
-  //       } on FirebaseException catch (error) {
-  //         WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //           await MyAppMethods.showErrorORWarningDialog(
-  //             context: context,
-  //             subtitle: "An error has been occured ${error.message}",
-  //             fct: () {},
-  //           );
-  //         });
-  //       } catch (error) {
-  //         WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //           await MyAppMethods.showErrorORWarningDialog(
-  //             context: context,
-  //             subtitle: "An error has been occured $error",
-  //             fct: () {},
-  //           );
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
+  // to verify email
+  Future<void> verityEmail() async {}
 
-  // sign in with google account
+  // to verify phone number
+  Future<void> verityPhoneNumber(BuildContext context) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneController.text.toString(),
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {
+        if (e.code == 'invalid-phone-number') {
+          showErrorSnackBar(S.of(context).phone_verify_error, 4, context);
+        }
+      },
+      codeSent: (String verificationId, int? resendToken) async => phoneVerify = verificationId,
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
 
-  // Future<void> signInWithGoogle(context) async {
-  //   emit(LoadingSignInWithGoogleState());
-  //   try {
-  //     AuthController.signUpWithGoogle().then((value) {
-  //       if (value.credential!.accessToken != null && value.credential!.token != null) {
-  //         if (value.additionalUserInfo!.isNewUser) {
-  //           FirebaseFirestore.instance.collection("users").doc(value.user!.uid).set({
-  //             'name': value.user!.displayName,
-  //             'email': value.user!.email,
-  //             'phone': value.user!.phoneNumber,
-  //             'uid': value.user!.uid,
-  //             'videos': [],
-  //             'createdAt': Timestamp.now(),
-  //           });
-  //           emit(SuccessSignInWithGoogleState());
-  //         }
-  //       }
-  //     });
-  //   } on FirebaseException catch (error) {
-  //     WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //       await showSnackBar("الحساب دا موجود قبل كدة ${error.message}", 3, context);
-  //       emit(ErrorSignInWithGoogleState("####################${error.toString()}"));
-  //     });
-  //   } catch (e) {
-  //     WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //       await showSnackBar("في مشكلة ${e.toString()}", 3, context);
-  //       emit(ErrorSignInWithGoogleState("%%%%%%%%%%%%%%%%%${e.toString()}"));
-  //     });
-  //   }
-  // }
+  void sendCode() async {
+    // Update the UI - wait for the user to enter the SMS code
+    String smsCode = phoneCodeController.text;
+
+    // ${generateRandomNumber().toString()}
+    // Create a PhoneAuthCredential with the code
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: phoneVerify!, smsCode: smsCode);
+
+    // Sign the user in (or link) with the credential
+    await auth.signInWithCredential(credential);
+  }
+
+  @override
+  Future<void> close() {
+    phoneController.dispose();
+    return super.close();
+  }
 }

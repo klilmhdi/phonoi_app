@@ -1,14 +1,19 @@
-class VideoDownloadModel {
-  final String? title;
-  final String? source;
-  final String? thumbnail;
-  final List<VideoQualityModel>? videos;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-  VideoDownloadModel({
-    this.title,
-    this.source,
-    this.thumbnail,
-    this.videos,
+class VideoDownloadModel extends Equatable {
+  final String title;
+  final String source;
+  final String thumbnail;
+  final List<VideoQualityModel> videos;
+  final Timestamp ?createdAt;
+
+  const VideoDownloadModel({
+    required this.title,
+    required this.source,
+    required this.thumbnail,
+    required this.videos,
+    required this.createdAt,
   });
 
   factory VideoDownloadModel.fromJson(Map<String, dynamic> json) {
@@ -16,18 +21,27 @@ class VideoDownloadModel {
       title: json['title'],
       source: json['source'],
       thumbnail: json['thumbnail'],
-      videos: (json['videos'] as List<dynamic>?)?.map((video) => VideoQualityModel.fromJson(video)).toList(),
+      videos: List.from(json['videos'].map((e) => VideoQualityModel.fromJson(e))),
+      createdAt: json['createdAt'],
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'source': source,
-      'thumbnail': thumbnail,
-      'videos': videos?.map((video) => video.toJson()).toList(),
-    };
+
+  factory VideoDownloadModel.empty() {
+    return VideoDownloadModel(
+      createdAt: Timestamp.now(),
+      title: "",
+      source: "",
+      thumbnail: "",
+      videos: [],
+    );
   }
+
+  @override
+  List<Object?> get props => [title, source, thumbnail, videos, createdAt];
+
+  @override
+  bool? get stringify => true;
 }
 
 class VideoQualityModel {
@@ -51,6 +65,13 @@ class VideoQualityModel {
       'url': url,
       'quality': quality,
     };
+  }
+
+  factory VideoQualityModel.empty() {
+    return VideoQualityModel(
+      url: "",
+      quality: "",
+    );
   }
 }
 
@@ -78,9 +99,7 @@ class VideoData {
       title: json['title'] as String?,
       thumbnail: json['thumbnail'] as String?,
       duration: json['duration'] as String?,
-      links: (json['links'] as List<dynamic>?)
-          ?.map((e) => Link.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      links: (json['links'] as List<dynamic>?)?.map((e) => Link.fromJson(e as Map<String, dynamic>)).toList(),
     );
   }
 }

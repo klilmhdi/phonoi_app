@@ -17,10 +17,10 @@ class Assets {
   static const String iconsPoint = 'assets/icons/point.png';
   static const String iconsPreview = 'assets/icons/preview.png';
   static const String iconsSama = 'assets/icons/sama.png';
-  static const String iconsSma = 'assets/icons/sma.png';
   static const String iconsTree = 'assets/icons/tree.png';
   static const String iconsTwitter = 'assets/icons/twitter.png';
   static const String iconsWhatsapp = 'assets/icons/whatsapp.png';
+  static const String iconsWta = 'assets/icons/wta.png';
   static const String iconsYoutube = 'assets/icons/youtube.png';
 
 }

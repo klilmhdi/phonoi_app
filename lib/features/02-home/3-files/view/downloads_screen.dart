@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phonoi_app/core/utils/widgets/snackbars_widgets.dart';
 
+import '../../../../generated/l10n.dart';
+
 class DownloadsScreen extends StatelessWidget {
   const DownloadsScreen({super.key});
 
@@ -18,12 +20,11 @@ class DownloadsScreen extends StatelessWidget {
           },
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black,
           ),
         ),
-        title: const Text(
-          'التنزيلات',
-          style: TextStyle(fontSize: 22, color: Colors.black),
+        title: Text(
+          S.of(context).downloads,
+          style: TextStyle(fontSize: 22),
         ),
         centerTitle: true,
       ),
@@ -36,7 +37,7 @@ class DownloadsScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => showSnackBar("نعمل على تطوير هذه الخاصية", 3, context),
+                    onTap: () => showSnackBar(S.of(context).we_develop_it, 3, context),
                     child: Container(
                       height: 87,
                       width: 104,
@@ -54,7 +55,7 @@ class DownloadsScreen extends StatelessWidget {
                             height: 5.0,
                           ),
                           Text(
-                            'المواقع الأخيرة',
+                            S.of(context).last_website,
                             style: TextStyle(fontSize: 14, color: Color(0xff8C52FF)),
                           ),
                         ],
@@ -133,7 +134,7 @@ class DownloadsScreen extends StatelessWidget {
                           child: Icon(Icons.download, size: 80),
                         ),
                         Text(
-                          'لا توجد مهام قيد التنزيل',
+                          S.of(context).downloads_is_empty,
                           style: TextStyle(fontSize: 20),
                         )
                       ],

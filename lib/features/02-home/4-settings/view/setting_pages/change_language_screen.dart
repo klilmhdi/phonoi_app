@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phonoi_app/core/app-cubit/language/language_cubit.dart';
+import 'package:phonoi_app/core/enums/language.dart';
 
-class LanguageSelectionScreen extends StatefulWidget {
-  @override
-  _LanguageSelectionScreenState createState() => _LanguageSelectionScreenState();
-}
-
-class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  String selectedLanguage = 'English';
-
-  void handleLanguageChange(String language) => setState(() {
-      selectedLanguage = language;
-    });
-
+class LanguageSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('تحديد اللغة'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          ListTile(
-            title: Text('الإنجليزية'),
-            leading: Radio(
-              value: 'English',
-              groupValue: selectedLanguage,
-              onChanged: (value)=> handleLanguageChange,
+    return BlocProvider(
+      create: (context) => LanguageCubit(),
+      child: BlocBuilder<LanguageCubit, LanguageState>(
+        bloc: context.read<LanguageCubit>(),
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('تحديد اللغة'),
+              centerTitle: true,
             ),
-          ),
-          ListTile(
-            title: Text('العربية'),
-            leading: Radio(
-              value: 'Arabic',
-              groupValue: selectedLanguage,
-              onChanged: (value)=> handleLanguageChange,
+            body: Column(
+              children: [
+                RadioListTile(
+                  onChanged: (value) => context.read<LanguageCubit>().switchLanguage(),
+                  value: Languages.eg,
+                  groupValue: state.isEnglish,
+                  title: Text('الإنجليزية'),
+                ),
+                RadioListTile(
+                  title: Text('العربية'),
+                    value: Languages.ar,
+                    groupValue: state.isEnglish,
+                    onChanged: (value) => context.read<LanguageCubit>().switchLanguage(),
+                ),
+              ],
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

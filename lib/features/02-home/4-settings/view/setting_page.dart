@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:phonoi_app/core/utils/functions/functions.dart';
 import 'package:phonoi_app/core/utils/widgets/dialoges.dart';
 import 'package:phonoi_app/core/utils/widgets/snackbars_widgets.dart';
-import 'package:phonoi_app/features/02-home/settings/view/setting_pages/change_font_size_screen.dart';
-import 'package:phonoi_app/features/02-home/settings/view/setting_pages/change_language_screen.dart';
-import 'package:phonoi_app/features/02-home/settings/view/setting_pages/download_settings.dart';
-import 'package:phonoi_app/features/02-home/settings/view/setting_pages/notification_settings.dart';
+import 'package:phonoi_app/features/02-home/4-settings/view/setting_pages/change_font_size_screen.dart';
+import 'package:phonoi_app/features/02-home/4-settings/view/setting_pages/change_language_screen.dart';
+import 'package:phonoi_app/features/02-home/4-settings/view/setting_pages/download_settings.dart';
+import 'package:phonoi_app/features/02-home/4-settings/view/setting_pages/notification_settings.dart';
 
 import '../../../../generated/l10n.dart';
 
@@ -59,7 +59,7 @@ class SettingPage extends StatelessWidget {
                   onTap: () {}),
               ListTile(
                   title: Text(S.of(context).search_updates),
-                  subtitle: Text("1.2.00", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey)),
+                  subtitle: Text("Beta", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.grey)),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () => loadingAlert(context)),
               ListTile(title: Text(S.of(context).about), trailing: Icon(Icons.arrow_forward_ios), onTap: () {}),

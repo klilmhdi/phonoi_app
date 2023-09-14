@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PhonoiApp</string>
+    <string name="facebook_app_id">290606920367481</string>
+    <string name="fb_login_protocol_scheme">fbeec78245e668d1d51c624bc7d9d1b606</string>
+</resources>
