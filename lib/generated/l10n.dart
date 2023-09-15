@@ -1261,6 +1261,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Change theme`
+  String get change_theme {
+    return Intl.message(
+      'Change theme',
+      name: 'change_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Language`
+  String get select_lang {
+    return Intl.message(
+      'Select Language',
+      name: 'select_lang',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

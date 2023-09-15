@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure to skip login ?"),
         "cancel_logout": MessageLookupByLibrary.simpleMessage(
             "Are you sure to need logout ?"),
+        "change_theme": MessageLookupByLibrary.simpleMessage("Change theme"),
         "check_link": MessageLookupByLibrary.simpleMessage(
             "Please, check if your link is correct then try again!!"),
         "check_privacy_policy": MessageLookupByLibrary.simpleMessage(
@@ -162,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_bar": MessageLookupByLibrary.simpleMessage("Search Engine"),
         "search_updates":
             MessageLookupByLibrary.simpleMessage("Search Updates"),
+        "select_lang": MessageLookupByLibrary.simpleMessage("Select Language"),
         "select_verity_method": MessageLookupByLibrary.simpleMessage(
             "After success signup, choose 1 of verification methods to complete verify account"),
         "select_verity_method_title":

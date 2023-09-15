@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:phonoi_app/core/utils/widgets/dialoges.dart';
 import 'package:phonoi_app/features/02-home/4-settings/view/setting_page.dart';
+import '../../../../core/app-cubit/app_cubit/app_cubit/app_cubit.dart';
 import '../../../../core/app-cubit/themes/theme_cubit.dart';
 import '../../../../core/utils/functions/functions.dart';
 import '../../../../generated/l10n.dart';
@@ -191,12 +192,22 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                   ListTile(
                     leading:
                         CircleAvatar(backgroundColor: Colors.deepOrange, child: Icon(Icons.sunny, color: Colors.white)),
-                    title: Text("Change theme"),
-                    trailing: BlocBuilder<ThemeCubit, ThemeState>(
-                      bloc: context.read<ThemeCubit>(),
+                    title: Text(S.of(context).change_theme),
+                    trailing: BlocBuilder<AppCubit, AppState>(
+                      buildWhen: (previous, current) => previous.themeCurrentIndex != current.themeCurrentIndex,
                       builder: (context, state) {
+                        AppCubit appCubit = BlocProvider.of(context, listen: false);
+
                         return Switch.adaptive(
-                            value: state.isDark, onChanged: (value) => context.read<ThemeCubit>().switchTheme());
+                            //=========> 0 Light
+                            value: state.themeCurrentIndex == 0,
+                            onChanged: (value) {
+                              if (state.themeCurrentIndex == 0) {
+                                appCubit.setThemeIndex(themeIndex: 1);
+                              } else {
+                                appCubit.setThemeIndex(themeIndex: 0);
+                              }
+                            });
                       },
                     ),
                   ),

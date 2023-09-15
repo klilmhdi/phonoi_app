@@ -186,10 +186,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                   onPressed: () async {
                                     var perm = await Permission.storage.request();
                                     if (perm.isGranted) {
-                                      Get.to(
-                                        () => VideoView(),
-                                        transition: Transition.downToUp,
-                                      );
+                                      // Get.to(
+                                      //   () => VideoView(),
+                                      //   transition: Transition.downToUp,
+                                      // );
+                                      navTo(context, VideoView());
                                     } else {
                                       checkPermission();
                                     }
@@ -201,10 +202,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                   onPressed: () async {
                                     var perm = await Permission.storage.request();
                                     if (perm.isGranted) {
-                                      Get.to(
-                                        () => MusicPlayerListScreen(),
-                                        transition: Transition.rightToLeft,
-                                      );
+                                      // Get.to(
+                                      //   () => MusicPlayerListScreen(),
+                                      //   transition: Transition.rightToLeft,
+                                      // );
+                                      navTo(context, MusicPlayerListScreen());
                                     } else {
                                       checkPermission();
                                     }
@@ -221,10 +223,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                       var perm = await Permission.storage.request();
                                       if (perm.isGranted) {
                                         pickFile();
-                                        Get.to(
-                                          () => DocumentViewer(),
-                                          transition: Transition.rightToLeft,
-                                        );
+                                        // Get.to(
+                                        //   () => DocumentViewer(),
+                                        //   transition: Transition.rightToLeft,
+                                        // );
+                                        navTo(context, navTo(context, VideoView()));
                                       } else {
                                         checkPermission();
                                       }
@@ -239,10 +242,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                     onPressed: () async {
                                       var perm = await Permission.storage.request();
                                       if (perm.isGranted) {
-                                        Get.to(
-                                          () => GalleryViewerScreen(),
-                                          transition: Transition.leftToRight,
-                                        );
+                                        // Get.to(
+                                        //   () => GalleryViewerScreen(),
+                                        //   transition: Transition.leftToRight,
+                                        // );
+                                        navTo(context, GalleryViewerScreen());
                                       } else {
                                         checkPermission();
                                       }
@@ -267,10 +271,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                     var perm = await Permission.storage.request();
                                     if (perm.isGranted) {
                                       pickFileApk();
-                                      Get.to(
-                                        () => GetApp(),
-                                        transition: Transition.leftToRight,
-                                      );
+                                      // Get.to(
+                                      //   () => GetApp(),
+                                      //   transition: Transition.leftToRight,
+                                      // );
+                                      navTo(context, GetApp());
                                     } else {
                                       checkPermission();
                                     }
@@ -285,10 +290,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                 onPressed: () async {
                                   var perm = await Permission.storage.request();
                                   if (perm.isGranted) {
-                                    Get.to(
-                                      () => WhatsappImage(),
-                                      transition: Transition.downToUp,
-                                    );
+                                    // Get.to(
+                                    //   () => WhatsappImage(),
+                                    //   transition: Transition.downToUp,
+                                    // );
+                                    navTo(context, WhatsappImage());
                                   } else {
                                     checkPermission();
                                   }
@@ -304,10 +310,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                   onPressed: () async {
                                     var perm = await Permission.storage.request();
                                     if (perm.isGranted) {
-                                      Get.to(
-                                        () => InstagramImage(),
-                                        transition: Transition.downToUp,
-                                      );
+                                      // Get.to(
+                                      //   () => InstagramImage(),
+                                      //   transition: Transition.downToUp,
+                                      // );
+                                      navTo(context, InstagramImage());
                                     } else {
                                       checkPermission();
                                     }
@@ -322,10 +329,11 @@ class _FilesScreenState extends State<FilesScreen> with AutomaticKeepAliveClient
                                   onPressed: () async {
                                     var perm = await Permission.storage.request();
                                     if (perm.isGranted) {
-                                      Get.to(
-                                        () => CompressedFiles(),
-                                        transition: Transition.leftToRight,
-                                      );
+                                      // Get.to(
+                                      //   () => CompressedFiles(),
+                                      //   transition: Transition.leftToRight,
+                                      // );
+                                      navTo(context, CompressedFiles());
                                     } else {
                                       checkPermission();
                                     }

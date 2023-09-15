@@ -1,15 +1,26 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phonoi_app/core/utils/widgets/snackbars_widgets.dart';
 
 import '../../../../generated/l10n.dart';
 
-class DownloadsScreen extends StatelessWidget {
+class DownloadsScreen extends StatefulWidget {
   const DownloadsScreen({super.key});
 
   @override
+  State<DownloadsScreen> createState() => _DownloadsScreenState();
+}
+
+class _DownloadsScreenState extends State<DownloadsScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  @override
   Widget build(BuildContext context) {
-    final bool isDownload = true;
+    final Stream<QuerySnapshot> _usersStream =
+        FirebaseFirestore.instance.collection('users').doc(user?.uid).collection("videos").snapshots();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -29,117 +40,112 @@ class DownloadsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsetsDirectional.only(start: 15, top: 26, end: 15),
+        padding: EdgeInsets.all(16),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => showSnackBar(S.of(context).we_develop_it, 3, context),
-                    child: Container(
-                      height: 87,
-                      width: 104,
-                      decoration: BoxDecoration(color: Color(0xffCAD6FF), borderRadius: BorderRadius.circular(12)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.language,
-                            color: Color(0xff8C52FF),
-                            size: 56,
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            S.of(context).last_website,
-                            style: TextStyle(fontSize: 14, color: Color(0xff8C52FF)),
-                          ),
-                        ],
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () => showSnackBar(S.of(context).we_develop_it, 3, context),
+                child: Container(
+                  height: 87,
+                  width: double.infinity,
+                  decoration: BoxDecoration(color: Color(0xffCAD6FF), borderRadius: BorderRadius.circular(12)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.language,
+                        color: Color(0xff8C52FF),
+                        size: 56,
                       ),
-                    ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Text(
+                        S.of(context).last_website,
+                        style: TextStyle(fontSize: 14, color: Color(0xff8C52FF)),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
             SizedBox(height: 26),
-            isDownload == true
-                ? Expanded(
-                    child: ListView.separated(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: 4,
-                      itemBuilder: (context, index) => Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.w),
-                          color: Colors.grey[100],
-                        ),
-                        child: ListTile(
-                          leading: Container(color: Colors.black87, width: 70.0, height: double.infinity),
-                          title: Text("اسم الملف"),
-                          subtitle: Text("نوع التنزيل"),
-                          trailing: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
+            StreamBuilder<QuerySnapshot>(
+              stream: _usersStream,
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Expanded(
+                    flex: 6,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 26),
+                        Container(
+                          height: 550,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.black,
+                            border: Border.all(
+                              color: const Color(0xff9B9B9B),
+                              width: 1,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ),
-                                  Icon(
-                                    Icons.refresh,
-                                    color: Colors.deepPurple,
-                                  ),
-                                ],
+                              SizedBox(
+                                width: 95,
+                                height: 74,
+                                child: Icon(Icons.download, size: 80),
                               ),
-                              SizedBox(width: 10.0,),
-                              Icon(
-                                Icons.check_circle,
-                                color: Colors.green,
-                              ),
+                              Text(
+                                S.of(context).downloads_is_empty,
+                                style: TextStyle(fontSize: 20),
+                              )
                             ],
                           ),
                         ),
-                      ),
-                      separatorBuilder: (BuildContext context, int index) => SizedBox(
-                        height: 10.0,
-                      ),
-                    ),
-                  )
-                : Container(
-                    height: 561,
-                    width: 346,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.black,
-                      border: Border.all(
-                        color: const Color(0xff9B9B9B),
-                        width: 1,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 95,
-                          height: 74,
-                          child: Icon(Icons.download, size: 80),
-                        ),
-                        Text(
-                          S.of(context).downloads_is_empty,
-                          style: TextStyle(fontSize: 20),
-                        )
                       ],
                     ),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.deepPurple,
+                    ),
+                  );
+                }
+
+                return Expanded(
+                  flex: 6,
+                  child: Center(
+                    child: Container(
+                        width: double.infinity,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                            return ListTile(
+                              leading: Container(
+                                width: 100,
+                                height: 150,
+                                child: CachedNetworkImage(imageUrl: "${data['thumbnail']}"),
+                              ),
+                              title: Text(data['title'] ?? "khaleel@gmail.com"),
+                              subtitle: Text(data['video'] == "Video" ? S.of(context).videos : S.of(context).musics ?? "Video"),
+                            );
+                          },
+                          itemCount: snapshot.data!.docs.length,
+                          separatorBuilder: (BuildContext context, int index) => SizedBox(height: 10.0),
+                        )),
                   ),
+                );
+              },
+            ),
           ],
         ),
       ),

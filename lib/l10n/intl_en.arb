@@ -120,5 +120,7 @@
   "instegram": "Instagram Media",
   "compreseds": "Compressed files",
   "arab": "Arabic",
-  "engl": "English"
+  "engl": "English",
+  "change_theme": "Change theme",
+  "select_lang": "Select Language"
 }

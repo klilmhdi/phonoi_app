@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "هل أنت متأكد من أنك تريد تخطي عملية تسجيل الدخول؟"),
         "cancel_logout": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد من أنك تريد تسجيل الخروج؟"),
+        "change_theme":
+            MessageLookupByLibrary.simpleMessage("تغيير ثمة التطبيق"),
         "check_link": MessageLookupByLibrary.simpleMessage(
             "تأكد من صلاحية الرابط الملصق وحاول فيما بعد!!"),
         "check_privacy_policy": MessageLookupByLibrary.simpleMessage(
@@ -161,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_bar": MessageLookupByLibrary.simpleMessage("محرك البحث"),
         "search_updates":
             MessageLookupByLibrary.simpleMessage("البحث عن التحديثات"),
+        "select_lang": MessageLookupByLibrary.simpleMessage("تحديد اللغة"),
         "select_verity_method": MessageLookupByLibrary.simpleMessage(
             "بعد عملية تسجيل الدخول الناجحة, اختر الطريقة لتوثيق حسابك"),
         "select_verity_method_title":

@@ -318,6 +318,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:phonoi_app/core/utils/notification/download_notification.dart';
 
 import '../../../../../core/enums/video_types.dart';
@@ -421,13 +422,13 @@ class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
                                       video: null,
                                     );
                                     linkCubit.state.copyWith(isLoading: true);
-                                    linkCubit.state.controller.text = "";
                                     linkCubit.state.controller.text = value.text!;
                                     if (value.text!.isEmpty || linkCubit.state.controller.text.isEmpty) {
                                       showErrorSnackBar("Please Enter Video URl", 2, context);
                                     } else {
                                       linkCubit.setVideoType(value.text!);
-                                      print("#################${value.text!}");
+                                      print("#################From clipboard: ${value.text!}");
+                                      print("#################From controller: ${linkCubit.state.controller.text}");
                                       linkCubit.state.copyWith(isSearching: true);
                                       await linkCubit.onLinkPasted(value.text!, context);
                                     }
@@ -474,6 +475,8 @@ class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
                                 selectedQualityIndex: 0,
                                 videoType: VideoType.non,
                                 isLoading: false,
+                                isSearching: false,
+                                isDownloading: false,
                                 qualities: [],
                                 video: null,
                               );
@@ -567,8 +570,7 @@ class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
                                       ),
                                       SizedBox(height: 6.h),
                                       AutoSizeText(
-                                        "",
-                                        // linkCubit.state?.fileName.toString() ?? "",
+                                        "${DateFormat("yyyyMMddHHmmss").format(DateTime.now())}${state.fileType}",
                                         minFontSize: 14,
                                         maxLines: 4,
                                         overflow: TextOverflow.ellipsis,

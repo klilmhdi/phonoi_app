@@ -1,17 +1,11 @@
-import 'package:phonoi_app/features/01-auth/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum UserPrKeys {
-  loggedIn,
-  password,
-  id,
-  token,
-  name,
-  deviceType,
-  fcmToken,
-  status,
-  phone,
-  email
+enum PrKeys {
+  languageCode,
+  themeCurrentIndex,
+  isLogin,
+  menuCurrentIndex,
+  flutterSdkPath,
 }
 
 class SharedPrefController {
@@ -36,6 +30,18 @@ class SharedPrefController {
     return null;
   }
 
+  //==================> Set the language
+  Future<bool> setLanguageCode({
+    required String langCode,
+  }) async {
+    return await _sharedPreferences!.setString(PrKeys.languageCode.name, langCode);
+  }
+
+  //=========================> Set the Theme
+  Future<bool> setTheme({required int themeCurrentIndex}) async {
+    return await _sharedPreferences!.setInt(PrKeys.themeCurrentIndex.name, themeCurrentIndex);
+  }
+
   Future<bool> setString({
     required String key,
     required String value,
@@ -43,35 +49,19 @@ class SharedPrefController {
     return await _sharedPreferences!.setString(key, value);
   }
 
-  Future<void> saveUser({required UserModel user}) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(UserPrKeys.loggedIn.name, true);
-    // await prefs.setInt(UserPrKeys.id.name, user.id);
-    await prefs.setString(UserPrKeys.name.name, user.name ?? "");
-    await prefs.setString(UserPrKeys.email.name, user.email ?? "");
-    // await prefs.setString(UserPrKeys.deviceType.name, user.devicetype ?? "");
-    // await prefs.setString(UserPrKeys.fcmToken.name, user.fcmtoken ?? "");
-    // await prefs.setString(UserPrKeys.status.name, user.status.name);
-    // await prefs.setString(UserPrKeys.lat.name, user.lat ?? '');
-    // await prefs.setString(UserPrKeys.long.name, user.long ?? '');
-    // await prefs.setString(UserPrKeys.token.name, "Bearer ${user.token}");
-    // await prefs.setString(UserPrKeys.firstName.name, user.token);
-  }
-
-  Future<void> saveUserLocally(String key, String value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(key, value);
-    print('Value saved locally: $value');
-  }
-
-  Future<String?> getSavedValue(String key) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? value = prefs.getString(key);
-    print('Retrieved value: $value');
-    return value;
-  }
-
   void clear() async {
     _sharedPreferences!.clear();
+  }
+
+  Future<bool> setIsLogin({required bool value}) async {
+    return await _sharedPreferences!.setBool(PrKeys.isLogin.name, value);
+  }
+
+  Future<bool> setMenuCurrentIndex({required int index}) async {
+    return await _sharedPreferences!.setInt(PrKeys.menuCurrentIndex.name, index);
+  }
+
+  Future<bool> setFlutterSdk({required String flutterSdkPath}) async {
+    return await _sharedPreferences!.setString(PrKeys.flutterSdkPath.name, flutterSdkPath);
   }
 }
