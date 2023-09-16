@@ -10,6 +10,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class WhatsappImage extends StatefulWidget {
   @override
   _WhatsappImageState createState() => _WhatsappImageState();
@@ -105,7 +107,7 @@ class _WhatsappImageState extends State<WhatsappImage> with SingleTickerProvider
           ),
         ),
         title: Text(
-          'WhatsApp',
+          S.of(context).whatsapp,
           style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -149,10 +151,10 @@ class _WhatsappImageState extends State<WhatsappImage> with SingleTickerProvider
             controller: _tabController,
             tabs: [
               Tab(
-                text: 'الصور ',
+                text: S.of(context).pic,
               ),
               Tab(
-                text: ' الفيديو',
+                text: S.of(context).videos,
               ),
             ],
           ),

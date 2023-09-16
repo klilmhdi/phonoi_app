@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "files": MessageLookupByLibrary.simpleMessage("Files"),
         "font_size": MessageLookupByLibrary.simpleMessage("Font Size"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Photo gallery"),
         "games": MessageLookupByLibrary.simpleMessage("Best Games"),
         "go_to_sign_up": MessageLookupByLibrary.simpleMessage(
             "Sign up firstly before download videos"),

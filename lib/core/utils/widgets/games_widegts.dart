@@ -1,9 +1,16 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class Games extends StatelessWidget {
-  const Games({
+class GamesCard extends StatelessWidget {
+  GamesCard({
     super.key,
+    required this.gameImage,
+    required this.gameName,
   });
+
+  String gameName;
+  String gameImage;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +19,16 @@ class Games extends StatelessWidget {
         SizedBox(
           height: 56,
           width: 56,
-          child: Image.asset('assets/icons/Mask.png'),
+          child: CachedNetworkImage(imageUrl: gameImage, placeholder: (context, url) => CircularProgressIndicator(),),
         ),
-        Text("Galaxy\nAttack",style: TextStyle(fontSize: 13),),
+        AutoSizeText(
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          minFontSize: 8,
+          maxFontSize: 10,
+          gameName,
+          style: TextStyle(fontSize: 10),
+        ),
       ],
     );
   }

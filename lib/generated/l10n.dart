@@ -1242,6 +1242,16 @@ class S {
     );
   }
 
+  /// `Photo gallery`
+  String get gallery {
+    return Intl.message(
+      'Photo gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Arabic`
   String get arab {
     return Intl.message(

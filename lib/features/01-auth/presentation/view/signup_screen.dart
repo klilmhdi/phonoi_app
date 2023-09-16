@@ -96,14 +96,17 @@ class SignupPage extends StatelessWidget {
                                         return null;
                                       }
                                     },
+                                    style: TextStyle(color: Colors.black87),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
+                                      hintStyle: TextStyle(color: Colors.black87),
                                       hintText: S.of(context).name,
                                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                                     ),
                                   ),
                                   Divider(
                                     height: 10,
+                                    color: Colors.grey,
                                   ),
                                   TextFormField(
                                     onFieldSubmitted: (value) {
@@ -126,14 +129,17 @@ class SignupPage extends StatelessWidget {
                                         return null;
                                       }
                                     },
+                                    style: TextStyle(color: Colors.black87),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: S.of(context).email,
+                                      hintStyle: TextStyle(color: Colors.black87),
                                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                                     ),
                                   ),
                                   Divider(
                                     height: 10,
+                                    color: Colors.grey,
                                   ),
                                   IntlPhoneField(
                                     onSubmitted: (value) {
@@ -145,6 +151,7 @@ class SignupPage extends StatelessWidget {
                                     },
                                     controller: signupCubit.phoneController,
                                     keyboardType: TextInputType.phone,
+                                    style: TextStyle(color: Colors.black87),
                                     validator: (value) {
                                       if (value == null || value.number.isEmpty) {
                                         return S.of(context).input_validate;
@@ -152,13 +159,17 @@ class SignupPage extends StatelessWidget {
                                       return null;
                                     },
                                     decoration: InputDecoration(
+
                                       border: InputBorder.none,
+                                      iconColor: Colors.black87,
+                                      hintStyle: TextStyle(color: Colors.black87),
                                       hintText: S.of(context).phone,
                                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                                     ),
                                   ),
                                   Divider(
                                     height: 10,
+                                    color: Colors.grey,
                                   ),
                                   TextFormField(
                                     onFieldSubmitted: (value) {
@@ -198,10 +209,12 @@ class SignupPage extends StatelessWidget {
                                       }
                                     },
                                     obscureText: true,
+                                    style: TextStyle(color: Colors.black87),
                                     keyboardType: TextInputType.visiblePassword,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: S.of(context).password,
+                                      hintStyle: TextStyle(color: Colors.black87),
                                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                                     ),
                                   ),

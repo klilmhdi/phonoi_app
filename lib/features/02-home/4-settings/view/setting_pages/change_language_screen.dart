@@ -19,6 +19,7 @@ class LanguageSelectionScreen extends StatelessWidget {
           return Column(
             children: [
               RadioListTile<String>(
+                activeColor: Colors.deepPurple,
                 onChanged: (String? value) {
                   appCubit.setLanguage(languageCode: 'en');
                 },
@@ -27,6 +28,7 @@ class LanguageSelectionScreen extends StatelessWidget {
                 title: Text(S.of(context).engl),
               ),
               RadioListTile<String>(
+                activeColor: Colors.deepPurple,
                 title: Text(S.of(context).arab),
                 value: state.languageCode,
                 groupValue: "ar",

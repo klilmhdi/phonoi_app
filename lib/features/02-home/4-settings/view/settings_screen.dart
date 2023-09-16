@@ -199,6 +199,7 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                         AppCubit appCubit = BlocProvider.of(context, listen: false);
 
                         return Switch.adaptive(
+                            activeColor: Colors.deepPurple,
                             //=========> 0 Light
                             value: state.themeCurrentIndex == 0,
                             onChanged: (value) {

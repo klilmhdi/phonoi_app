@@ -22,14 +22,11 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
   Map<DateTime, List<AssetEntity>> tempAssetsByDate = {};
   int loadedImageCount = 0;
 
-
   @override
   void initState() {
     super.initState();
     _fetchAssets();
   }
-
-
 
   Future<void> _shareSelectedImages(List<AssetEntity> selectedAssets) async {
     List<XFile> xFiles = [];
@@ -53,7 +50,6 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
     });
   }
 
-
   Future<void> _deleteSelectedImages() async {
     List<String> deletedImageIds = [];
 
@@ -73,9 +69,7 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
     setState(() {
       selectedImages.clear();
     });
-
   }
-
 
   _fetchAssets() async {
     final albums = await PhotoManager.getAssetPathList(
@@ -92,7 +86,7 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
 
     for (final asset in recentAssets) {
       final dateTime = asset.createDateTime;
-      final  dateOnly = DateTime(dateTime.year, dateTime.month, dateTime.day);
+      final dateOnly = DateTime(dateTime.year, dateTime.month, dateTime.day);
       if (!sortedAssets.containsKey(dateOnly)) {
         sortedAssets[dateOnly] = [];
       }
@@ -122,7 +116,6 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
     return false;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,14 +132,16 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
         ),
         title: Text(
           ' معرض الصور',
-          style:
-              TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: [
           if (selectedImages.isNotEmpty)
             IconButton(
-              icon: Icon(Icons.delete_forever,size: 28,),
+              icon: Icon(
+                Icons.delete_forever,
+                size: 28,
+              ),
               onPressed: () {
                 // تنفيذ الحذف للصور المحددة
                 _deleteSelectedImages();
@@ -220,7 +215,7 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
                             });
                           },
                           onTap: () {
-                            if(selectedImages.isNotEmpty){
+                            if (selectedImages.isNotEmpty) {
                               setState(() {
                                 if (selectedImages.contains(asset)) {
                                   selectedImages.remove(asset);
@@ -228,23 +223,21 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
                                   selectedImages.add(asset);
                                 }
                               });
-                            }else{
-                             _previewAsset(asset, assetsByDate);
+                            } else {
+                              _previewAsset(asset, assetsByDate);
                             }
                           },
-                          // onTap: () => _previewAsset(asset),
-                          // child: Image.memory(bytes, fit: BoxFit.cover),
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              Image.memory(bytes,fit: BoxFit.cover),
+                              Image.memory(bytes, fit: BoxFit.cover),
                               if (selectedImages.contains(asset))
                                 Positioned(
                                   bottom: 0,
                                   right: 0,
                                   // left: 0,
                                   child: Padding(
-                                    padding:  EdgeInsets.all(5.0),
+                                    padding: EdgeInsets.all(5.0),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
@@ -275,8 +268,7 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
   }
 
   _previewAsset(AssetEntity asset, assetsByDate) async {
-    final deleted =
-    await Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+    final deleted = await Navigator.of(context).push(MaterialPageRoute(builder: (_) {
       if (asset.type == AssetType.video) {
         return VideoScreen(asset: asset);
       }
@@ -288,14 +280,16 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
       setState(() {});
     }
   }
-
 }
 //################################################################################################
 
 class VideoScreen extends StatefulWidget {
   final AssetEntity asset;
 
-  const VideoScreen({Key? key, required this.asset , }) : super(key: key);
+  const VideoScreen({
+    Key? key,
+    required this.asset,
+  }) : super(key: key);
 
   @override
   _VideoScreenState createState() => _VideoScreenState();
@@ -319,7 +313,6 @@ class _VideoScreenState extends State<VideoScreen> {
       });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -333,9 +326,7 @@ class _VideoScreenState extends State<VideoScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
+            _controller.value.isPlaying ? _controller.pause() : _controller.play();
           });
         },
         child: Icon(
@@ -352,23 +343,17 @@ class _VideoScreenState extends State<VideoScreen> {
   }
 }
 
-
-
-
-
-
 class ImageScreen extends StatefulWidget {
   final AssetEntity asset;
   final Map<DateTime, List<AssetEntity>> assetsByDate;
 
-  const ImageScreen({Key? key, required this.asset , required this.assetsByDate}) : super(key: key);
+  const ImageScreen({Key? key, required this.asset, required this.assetsByDate}) : super(key: key);
 
   @override
   State<ImageScreen> createState() => _ImageScreenState();
 }
 
 class _ImageScreenState extends State<ImageScreen> {
-
   double maxScale = 5.0;
   double scale = 1.0;
   Offset position = Offset(0, 0);
@@ -378,105 +363,102 @@ class _ImageScreenState extends State<ImageScreen> {
   double appBarPosition = -kToolbarHeight;
   bool _imageDeleted = false;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: showBars ? Colors.black : Colors.white,
-      appBar: null,
-      body: Stack(
-        children: [
-          FutureBuilder<File?>(
-            future: widget.asset.file,
-            builder: (_, snapshot) {
-              final file = snapshot.data;
-              if (file == null)
-                return CircularProgressIndicator(
-                  backgroundColor: Colors.red,
+        backgroundColor: showBars ? Colors.black : Colors.white,
+        appBar: null,
+        body: Stack(
+          children: [
+            FutureBuilder<File?>(
+              future: widget.asset.file,
+              builder: (_, snapshot) {
+                final file = snapshot.data;
+                if (file == null)
+                  return CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                  );
+                return PhotoView(
+                  imageProvider: FileImage(file),
+                  minScale: PhotoViewComputedScale.contained,
+                  maxScale: PhotoViewComputedScale.covered * 2,
+                  enableRotation: false,
+                  // initialScale: 1.0,
+                  onTapUp: (context, details, controllerValue) {
+                    // تبديل إظهار الشرائط عند الضغط على الصورة
+                    toggleBars();
+                  },
+                  backgroundDecoration: BoxDecoration(
+                    color: showBars ? Colors.black : Colors.white,
+                  ),
                 );
-              return PhotoView(
-                imageProvider: FileImage(file),
-                minScale: PhotoViewComputedScale.contained,
-                maxScale: PhotoViewComputedScale.covered * 2,
-                enableRotation: false,
-                // initialScale: 1.0,
-                onTapUp: (context, details, controllerValue) {
-                  // تبديل إظهار الشرائط عند الضغط على الصورة
-                  toggleBars();
-                },
-                backgroundDecoration: BoxDecoration(
-                  color: showBars ? Colors.black : Colors.white,
-                ),
-              );
-            },
-          ),
-          AnimatedPositioned(
-            duration: Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-            top: showBars ? 0 : appBarPosition,
-            left: 0,
-            right: 0,
-            child: AppBar(
-
-              backgroundColor: Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ),
-              ),
-              title: Text(
-                "${widget.asset.title}",
-                style: TextStyle(color: Colors.black, fontSize: 16),
-              ),
-              centerTitle: true,
+              },
             ),
-
-          ),
-          AnimatedPositioned(
+            AnimatedPositioned(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,
-              bottom: showBars ? 0 : appBarPosition,
+              top: showBars ? 0 : appBarPosition,
               left: 0,
               right: 0,
-
-              child: BottomAppBar(
-                color: Colors.white, // لون الشريط السفلي
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: IconButton(
-                        onPressed: () {
-                          _deleteImage();
-                        },
-                        icon: Icon(Icons.delete_forever,size: 32,),
-                      ),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        onPressed: () {
-                          // يمكنك إضافة إجراءات أخرى هنا
-                          _shareImage(widget.asset);
-                        },
-                        icon: Icon(Icons.share,size: 32,),
-                      ),
-                    ),
-                  ],
+              child: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
                 ),
-              )
-
-          ),
-        ],
-      )
-    );
+                title: Text(
+                  "${widget.asset.title}",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+                centerTitle: true,
+              ),
+            ),
+            AnimatedPositioned(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                bottom: showBars ? 0 : appBarPosition,
+                left: 0,
+                right: 0,
+                child: BottomAppBar(
+                  color: Colors.white, // لون الشريط السفلي
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: IconButton(
+                          onPressed: () {
+                            _deleteImage();
+                          },
+                          icon: Icon(
+                            Icons.delete_forever,
+                            size: 32,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: IconButton(
+                          onPressed: () {
+                            // يمكنك إضافة إجراءات أخرى هنا
+                            _shareImage(widget.asset);
+                          },
+                          icon: Icon(
+                            Icons.share,
+                            size: 32,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ],
+        ));
   }
-
 
   Future<void> _deleteImage() async {
     try {
@@ -500,14 +482,12 @@ class _ImageScreenState extends State<ImageScreen> {
     }
   }
 
-
   void toggleBars() {
     setState(() {
       showBars = !showBars;
       appBarPosition = showBars ? 0 : -kToolbarHeight;
     });
   }
-
 
   Future<void> _shareImage(AssetEntity asset) async {
     final file = await asset.file;

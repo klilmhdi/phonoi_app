@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "facebook": MessageLookupByLibrary.simpleMessage("فيسبوك"),
         "files": MessageLookupByLibrary.simpleMessage("الملفات"),
         "font_size": MessageLookupByLibrary.simpleMessage("حجم الخط"),
+        "gallery": MessageLookupByLibrary.simpleMessage("معرض الصور"),
         "games": MessageLookupByLibrary.simpleMessage("أفضل الألعاب"),
         "go_to_sign_up": MessageLookupByLibrary.simpleMessage(
             "قم بتسجيل الدخول لتتمكن من تنزيل الفيديوهات"),

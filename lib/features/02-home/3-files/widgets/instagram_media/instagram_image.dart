@@ -10,6 +10,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../generated/l10n.dart';
 import 'instagram_video.dart';
 
 class InstagramImage extends StatefulWidget {
@@ -131,7 +132,7 @@ class _InstagramImageState extends State<InstagramImage>
             ),
           ),
           title: Text(
-            'انستجرام',
+            S.of(context).instegram,
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold),
           ),
@@ -176,10 +177,10 @@ class _InstagramImageState extends State<InstagramImage>
               controller: _tabController,
               tabs: [
                 Tab(
-                  text: 'الصور ',
+                  text: S.of(context).pic,
                 ),
                 Tab(
-                  text: ' الفيديو',
+                  text: S.of(context).videos,
                 ),
               ],
             ),

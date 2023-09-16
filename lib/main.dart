@@ -28,7 +28,7 @@ import 'features/01-auth/presentation/bloc-cubit/login/login_cubit.dart';
 import 'features/02-home/01-home_webview/presentation/manage/add_link/add_link_cubit.dart';
 import 'features/02-home/01-home_webview/presentation/manage/home/home_cubit.dart';
 import 'features/02-home/01-home_webview/presentation/manage/new_link_cubit/new_link_cubit.dart';
-import 'features/02-home/2-games_suggestions/manage/explorer_cubit.dart';
+import 'features/02-home/2-games_suggestions/presentation/manage/explorer_cubit.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
               // In app screens
               BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),
               BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
-              BlocProvider<ExplorerCubit>(create: (context) => ExplorerCubit()),
+              BlocProvider<ExplorerCubit>(create: (context) => ExplorerCubit()..fetchGames()),
               BlocProvider<AddLinkCubit>(create: (context) => AddLinkCubit()),
               BlocProvider<NewLinkCubit>(create: (context) => NewLinkCubit()..init()),
               BlocProvider<SettingsCubit>(
