@@ -59,8 +59,10 @@ Future<void> selectStorage(BuildContext context, controller) async {
                       .toList()),
             );
           }
-          return Dialog(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Dialog(
+              child: CircularProgressIndicator(),
+            ),
           );
         },
       ),
