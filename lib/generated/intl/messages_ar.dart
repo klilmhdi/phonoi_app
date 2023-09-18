@@ -174,7 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "share_app": MessageLookupByLibrary.simpleMessage("شارك Phonoi"),
         "sign_in_title": MessageLookupByLibrary.simpleMessage(
-            "تسجيل الدخول لمزامنة بياناتك والحصول على المزايا"),
+            "تسجيل الدخول لمزامنة بياناتك \nوالحصول على المزايا"),
         "sign_up": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "start": MessageLookupByLibrary.simpleMessage("بدء"),
         "storage": MessageLookupByLibrary.simpleMessage("التخزين"),
