@@ -42,4 +42,10 @@ class LoginCubit extends Cubit<LoginState> {
       });
     }
   }
+
+  // sign in with facebook
+  Future<void> signInWithFacebook(context) async {}
+
+  // sign in with twitter
+  Future<void> signInWithTwitter(context) async {}
 }

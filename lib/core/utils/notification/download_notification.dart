@@ -1,32 +1,74 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class DownloadNotification {
-  static Future init(FlutterLocalNotificationsPlugin plugin) async {
-    var androidInit = const AndroidInitializationSettings("mipmap/ic_launcher");
-    DarwinInitializationSettings initializationSettings = const DarwinInitializationSettings();
-    var initSettings = InitializationSettings(android: androidInit, iOS: initializationSettings);
-    await plugin.initialize(initSettings);
+  static final flutterNotificationService = FlutterLocalNotificationsPlugin();
+
+  static Future<void> init() async {
+    const AndroidInitializationSettings androidInitializationSettings =
+        AndroidInitializationSettings("mipmap/ic_launcher");
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(android: androidInitializationSettings);
+
+    await flutterNotificationService.initialize(initializationSettings);
   }
 
-  Future showNotification(
-      {var id = 0,
-      required String title,
-      required String body,
-      var payload,
-      required FlutterLocalNotificationsPlugin plugin}) async {
-    AndroidNotificationDetails details = const AndroidNotificationDetails(
-      'channelId',
-      'channelName',
-      playSound: true,
-      importance: Importance.max,
-      priority: Priority.high,
-    );
+  //Notification Details
+  static Future<NotificationDetails> _notificationDetails() async {
+    const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails('id', 'download',
+        channelDescription: 'channel_description', importance: Importance.max, priority: Priority.max, playSound: true);
 
-    const DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails(presentSound: false);
-    var not = NotificationDetails(
-      android: details,
-      iOS: darwinNotificationDetails,
+    return const NotificationDetails(android: androidNotificationDetails);
+  }
+
+  //Show Notification
+  static Future<void> showNotification({
+    required String title,
+    required String body,
+  }) async {
+    var details = await _notificationDetails();
+
+    await flutterNotificationService.show(1, title, body, details);
+  }
+
+  //Show Progress Notification
+  static Future<void> showProgressNotification({
+    required int progress,
+    required int maxProgress,
+    required String title,
+    required String body,
+  }) async {
+    final AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
+        'progress channel', 'progress channel',
+        channelDescription: 'progress channel description',
+        channelShowBadge: false,
+        importance: Importance.max,
+        priority: Priority.high,
+        onlyAlertOnce: true,
+        showProgress: true,
+        maxProgress: maxProgress,
+        progress: progress);
+    final NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
+
+    await flutterNotificationService.show(
+      0,
+      title,
+      body,
+      notificationDetails,
     );
-    await plugin.show(0, title, body, not);
+  }
+
+  //Cancel All Notifications
+  static Future<void> cancelAllNotifications() async {
+    try {
+      await flutterNotificationService.cancelAll();
+    } catch (e) {
+      print("cancelAllNotifications Method Error ! = $e");
+    }
+  }
+
+  //Cancel Custom Notification with ID
+  static Future<void> cancelCustomNotification({int id = 0}) async {
+    await flutterNotificationService.cancel(id);
   }
 }

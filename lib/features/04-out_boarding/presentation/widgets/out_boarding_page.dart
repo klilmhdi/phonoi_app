@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class OutBoardingPage extends StatelessWidget {
   const OutBoardingPage({
     super.key,
     required this.text,
     required int pageIndex,
     required PageController pageController,
-  }) : _pageIndex = pageIndex, _pageController = pageController;
+  })  : _pageIndex = pageIndex,
+        _pageController = pageController;
 
   final int _pageIndex;
   final String text;
@@ -22,13 +22,13 @@ class OutBoardingPage extends StatelessWidget {
         SizedBox(
           width: 25.w,
           child: Padding(
-            padding:   EdgeInsetsDirectional.only(start: 5.w),
+            padding: EdgeInsetsDirectional.only(start: 5.w),
             child: IconButton(
               onPressed: _pageIndex > 0
                   ? () => _pageController.previousPage(
-                duration: const Duration(seconds: 1),
-                curve: Curves.easeInOutBack,
-              )
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeInOutBack,
+                      )
                   : null,
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -37,7 +37,6 @@ class OutBoardingPage extends StatelessWidget {
             ),
           ),
         ),
-
         SizedBox(
           width: 155.w,
           height: 145.h,
@@ -57,22 +56,15 @@ class OutBoardingPage extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed:
-          _pageIndex < 2
-              ? () => _pageController.nextPage(
-              duration: const Duration(seconds: 1),
-              curve: Curves.easeInOutBack)
+          onPressed: _pageIndex < 2
+              ? () => _pageController.nextPage(duration: const Duration(seconds: 1), curve: Curves.easeInOutBack)
               : null,
           icon: const Icon(
             Icons.arrow_forward_ios,
             color: Colors.white,
-
           ),
         ),
       ],
     );
   }
 }
-
-
-//"تحميل أي فيديو أو\n فيلم من أي مكان \n بكل سهولة"

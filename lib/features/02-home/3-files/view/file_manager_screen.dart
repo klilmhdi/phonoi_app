@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:file_manager/file_manager.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/file_explorer_appbar_widget.dart';
-import '../widgets/file_explorer_subtitle_widget.dart';
+import '../widgets/file_explorer/file_explorer_appbar_widget.dart';
+import '../widgets/file_explorer/file_explorer_subtitle_widget.dart';
 
 class FileManagerScreen extends StatelessWidget {
   final FileManagerController controller = FileManagerController();
@@ -34,35 +32,7 @@ class FileManagerScreen extends StatelessWidget {
                     subtitle: subtitle(entity),
                     onTap: () async {
                       if (FileManager.isDirectory(entity)) {
-                        // open the folder
                         controller.openDirectory(entity);
-
-                        // delete a folder
-                        // await entity.delete(recursive: true);
-
-                        // rename a folder
-                        // await entity.rename("newPath");
-
-                        // Check weather folder exists
-                        // entity.exists();
-
-                        // get date of file
-                        // DateTime date = (await entity.stat()).modified;
-                      } else {
-                        // delete a file
-                        // await entity.delete();
-
-                        // rename a file
-                        // await entity.rename("newPath");
-
-                        // Check weather file exists
-                        // entity.exists();
-
-                        // get date of file
-                        // DateTime date = (await entity.stat()).modified;
-
-                        // get the size of the file
-                        // int size = (await entity.stat()).size;
                       }
                     },
                   ),
@@ -71,12 +41,6 @@ class FileManagerScreen extends StatelessWidget {
             );
           },
         ),
-        // floatingActionButton: FloatingActionButton.extended(
-        //   onPressed: () async {
-        //     FileManager.requestFilesAccessPermission();
-        //   },
-        //   label: Text("Request File Access Permission"),
-        // ),
       ),
     );
   }
