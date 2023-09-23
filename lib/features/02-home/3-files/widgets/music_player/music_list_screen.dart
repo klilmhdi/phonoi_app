@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:get/get.dart';
+import 'package:phonoi_app/core/utils/functions/functions.dart';
 import 'package:phonoi_app/features/02-home/3-files/widgets/music_player/player_controller.dart';
 
 import '../../../../../generated/l10n.dart';
@@ -25,7 +26,10 @@ class MusicPlayerListScreen extends StatelessWidget {
         ),
         title: Text(
           S.of(context).all_music,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, ),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
       ),
       body: FutureBuilder<List<SongModel>>(
@@ -62,11 +66,17 @@ class MusicPlayerListScreen extends StatelessWidget {
                       // tileColor: Colors.grey.shade300,
                       title: Text(
                         "${snapshot.data![index].title}",
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, ),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
                       ),
                       subtitle: Text(
                         "${snapshot.data![index].artist}",
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, ),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
                       ),
                       leading: QueryArtworkWidget(
                         id: snapshot.data![index].id,
@@ -89,11 +99,7 @@ class MusicPlayerListScreen extends StatelessWidget {
                             )
                           : null,
                       onTap: () {
-                        Get.to(
-                            () => MusicPlayer(
-                                  data: snapshot.data!,
-                                ),
-                            transition: Transition.downToUp);
+                        navToMusic(context, MusicPlayer(data: snapshot.data!));
                         controller.playSong(
                           snapshot.data![index].uri,
                           index,

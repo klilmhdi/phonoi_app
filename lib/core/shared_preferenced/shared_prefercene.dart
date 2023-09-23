@@ -1,41 +1,67 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreference {
-  static late SharedPreferences? _sharedPreference;
+enum PrKeys {
+  languageCode,
+  themeCurrentIndex,
+  isLogin,
+  menuCurrentIndex,
+  flutterSdkPath,
+}
 
-  Future init() async {
-    _sharedPreference = await SharedPreferences.getInstance();
+class SharedPrefController {
+  SharedPrefController._();
+
+  static SharedPrefController? _instance;
+
+  late SharedPreferences? _sharedPreferences;
+
+  factory SharedPrefController() {
+    return _instance ??= SharedPrefController._();
   }
 
-  static dynamic getSharedPrefData({required String key}) => _sharedPreference!.get(key);
+  Future<void> initPreferences() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+  }
 
-  static Future<dynamic> setSharedPrefData({required String key, dynamic value}) async {
-    switch (value.runtimeType) {
-      case String:
-        {
-          _sharedPreference!.setString(key, value);
-          break;
-        }
-      case int:
-        {
-          _sharedPreference!.setInt(key, value);
-          break;
-        }
-      case double:
-        {
-          _sharedPreference!.setDouble(key, value);
-          break;
-        }
-      case bool:
-        {
-          _sharedPreference!.setBool(key, value);
-          break;
-        }
-      default:
-        {
-          print("Invalid choice ${value.runtimeType.toString()}");
-        }
-        break;
+  T? getValueFor<T>(String key) {
+    if (_sharedPreferences!.containsKey(key)) {
+      return _sharedPreferences!.get(key) as T;
     }
+    return null;
+  }
+
+  //==================> Set the language
+  Future<bool> setLanguageCode({
+    required String langCode,
+  }) async {
+    return await _sharedPreferences!.setString(PrKeys.languageCode.name, langCode);
+  }
+
+  //=========================> Set the Theme
+  Future<bool> setTheme({required int themeCurrentIndex}) async {
+    return await _sharedPreferences!.setInt(PrKeys.themeCurrentIndex.name, themeCurrentIndex);
+  }
+
+  Future<bool> setString({
+    required String key,
+    required String value,
+  }) async {
+    return await _sharedPreferences!.setString(key, value);
+  }
+
+  void clear() async {
+    _sharedPreferences!.clear();
+  }
+
+  Future<bool> setIsLogin({required bool value}) async {
+    return await _sharedPreferences!.setBool(PrKeys.isLogin.name, value);
+  }
+
+  Future<bool> setMenuCurrentIndex({required int index}) async {
+    return await _sharedPreferences!.setInt(PrKeys.menuCurrentIndex.name, index);
+  }
+
+  Future<bool> setFlutterSdk({required String flutterSdkPath}) async {
+    return await _sharedPreferences!.setString(PrKeys.flutterSdkPath.name, flutterSdkPath);
   }
 }

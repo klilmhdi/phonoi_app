@@ -49,5 +49,7 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSAppleMusicUsageDescription</key>
+        <string>$(PROJECT_NAME) requires access to media library</string>
 	</dict>
 </plist>

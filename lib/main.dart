@@ -9,21 +9,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:phonoi_app/core/app-cubit/themes/theme_cubit.dart';
 import 'package:phonoi_app/core/firebase_services/firebase_services.dart';
-import 'package:phonoi_app/core/style/app_style.dart';
 import 'package:phonoi_app/core/utils/routes/routes.dart';
-import 'package:phonoi_app/core/utils/themes/themes.dart';
 import 'package:phonoi_app/features/01-auth/presentation/bloc-cubit/signup/signup_cubit.dart';
 import 'package:phonoi_app/features/02-home/0-layout/manage/app_layout/app_layout_cubit.dart';
 import 'package:phonoi_app/features/02-home/0-layout/view/layout.dart';
 import 'package:phonoi_app/features/02-home/4-settings/manage/settings_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'core/app-cubit/app_cubit/app_cubit/app_cubit.dart';
-import 'core/app-cubit/language/language_cubit.dart';
+import 'core/app_cubit/app_cubit.dart';
 import 'core/bloc_observer.dart';
-import 'core/shared_preferenced/shared_preferenced.dart';
+import 'core/shared_preferenced/shared_prefercene.dart';
+import 'core/utils/style/app_style.dart';
 import 'features/01-auth/presentation/bloc-cubit/login/login_cubit.dart';
 import 'features/02-home/01-home_webview/presentation/manage/add_link/add_link_cubit.dart';
 import 'features/02-home/01-home_webview/presentation/manage/home/home_cubit.dart';
@@ -38,8 +34,9 @@ Future<void> main() async {
 
   /// init firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp();
   // FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  await FirebaseAnalytics.instance;
+  // await FirebaseAnalytics.instance;
   await FirebaseService().initFcmToken();
   FacebookAuth.instance;
 
@@ -80,7 +77,6 @@ class MyApp extends StatelessWidget {
             providers: [
               // Authentications
               BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
-              BlocProvider<AppCubit>(create: (context) => AppCubit()..setLanguage(languageCode: null)),
               BlocProvider<SignupCubit>(create: (context) => SignupCubit()),
               // In app screens
               BlocProvider<AppLayoutCubit>(create: (context) => AppLayoutCubit()),
@@ -93,35 +89,29 @@ class MyApp extends StatelessWidget {
                     ..logout(context)
                     ..fetchUserInfo()),
               // app service
-              BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()..switchTheme()),
-              BlocProvider<LanguageCubit>(create: (context) => LanguageCubit()..switchLanguage()),
+              BlocProvider<AppCubit>(create: (context) => AppCubit()..setLanguage(languageCode: null)),
             ],
-            child: BlocBuilder<ThemeCubit, ThemeState>(
+            child: BlocBuilder<AppCubit, AppState>(
               builder: (context, state) {
-                /// variables
-                return BlocBuilder<AppCubit, AppState>(
-                  builder: (context, state) {
-                    return MaterialApp(
-                      title: "Phonoi App",
-                      debugShowCheckedModeBanner: false,
-                      theme: AppStyle(themeIndex: state.themeCurrentIndex).currentTheme,
+                return MaterialApp(
+                  title: "Phonoi App",
+                  debugShowCheckedModeBanner: false,
+                  theme: AppStyle(themeIndex: state.themeCurrentIndex).currentTheme,
 
-                      /// change themes and language
-                      themeMode: ThemeMode.light,
+                  /// change themes and language
+                  themeMode: ThemeMode.light,
 
-                      locale: Locale(state.languageCode),
-                      localizationsDelegates: [
-                        S.delegate,
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                        GlobalCupertinoLocalizations.delegate,
-                      ],
-                      supportedLocales: S.delegate.supportedLocales,
-                      routes: routes,
-                      initialRoute: '/splash_screen',
-                      home: Layout(),
-                    );
-                  },
+                  locale: Locale(state.languageCode),
+                  localizationsDelegates: [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: S.delegate.supportedLocales,
+                  routes: routes,
+                  initialRoute: '/splash_screen',
+                  home: Layout(),
                 );
               },
             ),

@@ -3,6 +3,8 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:get/get.dart';
 import 'package:phonoi_app/features/02-home/3-files/widgets/music_player/player_controller.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class MusicPlayer extends StatelessWidget {
   final List<SongModel> data;
 
@@ -40,19 +42,11 @@ class MusicPlayer extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'الموسيقى',
+                        S.of(context).music,
                         style: TextStyle(
                           fontSize: 22,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                        icon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
                         ),
                       ),
                     ],

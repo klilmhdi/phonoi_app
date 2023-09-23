@@ -5,8 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:phonoi_app/core/utils/widgets/dialoges.dart';
 import 'package:phonoi_app/features/02-home/4-settings/view/setting_page.dart';
-import '../../../../core/app-cubit/app_cubit/app_cubit/app_cubit.dart';
-import '../../../../core/app-cubit/themes/theme_cubit.dart';
+import '../../../../core/app_cubit/app_cubit.dart';
 import '../../../../core/utils/functions/functions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../01-auth/presentation/view/login_screen.dart';
@@ -147,7 +146,7 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                   ),
                   const SizedBox(height: 30),
                   ListTile(
-                    onTap: () => navTo(context, SettingPage()),
+                    onTap: () => navToWithLTRAnimation(context, SettingPage()),
                     leading: CircleAvatar(
                         backgroundColor: CupertinoColors.systemYellow,
                         child: Icon(
@@ -176,20 +175,6 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                   ),
                   const SizedBox(height: 30),
                   ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.black87,
-                        child: Icon(
-                          Icons.support_agent,
-                          color: Colors.white,
-                        )),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      color: Color(0xff5D5D5D),
-                    ),
-                    title: Text(S.of(context).help_center),
-                  ),
-                  const SizedBox(height: 30),
-                  ListTile(
                     leading:
                         CircleAvatar(backgroundColor: Colors.deepOrange, child: Icon(Icons.sunny, color: Colors.white)),
                     title: Text(S.of(context).change_theme),
@@ -197,7 +182,6 @@ class _SettingsScreenState extends State<SettingsScreen> with AutomaticKeepAlive
                       buildWhen: (previous, current) => previous.themeCurrentIndex != current.themeCurrentIndex,
                       builder: (context, state) {
                         AppCubit appCubit = BlocProvider.of(context, listen: false);
-
                         return Switch.adaptive(
                             activeColor: Colors.deepPurple,
                             //=========> 0 Light

@@ -98,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "if_you_want_download_directly": MessageLookupByLibrary.simpleMessage(
             "If you want to download the link directly,"),
+        "image": MessageLookupByLibrary.simpleMessage("Image Gallery"),
         "input_validate": MessageLookupByLibrary.simpleMessage(
             "This field is empty, please fill in this field"),
         "insta": MessageLookupByLibrary.simpleMessage("Instagram"),
@@ -128,6 +129,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "name_input_validate": MessageLookupByLibrary.simpleMessage(
             "Please type the name correctly!!"),
+        "no_apps":
+            MessageLookupByLibrary.simpleMessage("There are no applications"),
+        "no_compressed": MessageLookupByLibrary.simpleMessage(
+            "There are no file compressed"),
+        "no_files": MessageLookupByLibrary.simpleMessage("There are no files"),
         "no_musics": MessageLookupByLibrary.simpleMessage("No Musics found!!"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
@@ -186,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("verify using email"),
         "using_phone":
             MessageLookupByLibrary.simpleMessage("verify using phone"),
+        "video": MessageLookupByLibrary.simpleMessage("Videos Player"),
         "video_option":
             MessageLookupByLibrary.simpleMessage("Video (High Quality)"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),

@@ -36,53 +36,24 @@ class HomeScreen extends StatelessWidget {
                     child: Image.asset(Assets.appIconsAppIcon),
                   ),
                 ),
-                SizedBox(
-                  width: 351.w,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextField(
-                        onTap: () {
-                          navTo(context, SearchScreen());
-                        },
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          constraints: BoxConstraints(maxHeight: 50.h, maxWidth: 347.w),
-                          fillColor: const Color(0xffEBEBEB),
-                          filled: true,
-                          hintText: S.of(context).search,
-                          hintStyle: TextStyle(fontSize: 13.sp, color: Colors.black87),
-                          prefixIcon: SizedBox(
-                            width: 10.5.w,
-                            height: 10.5.h,
-                            child: Image.asset("assets/icons/google.png"),
-                          ),
-                          border:
-                              OutlineInputBorder(borderRadius: BorderRadius.circular(24), borderSide: BorderSide.none),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            S.of(context).if_you_want_download_directly,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextButton(
-                              child: Text(S.of(context).click_here, style: TextStyle(color: Colors.blue)),
-                              onPressed: () {
-                                if (cubit.user == null) {
-                                  print("Didn't find the users");
-                                  showErrorSnackBar(S.of(context).go_to_sign_up, 4, context);
-                                } else {
-                                  Navigator.pushNamed(context, '/add_download_link_screen');
-                                }
-                              }),
-                          // onPressed: () => Navigator.pushNamed(context, '/add_link_screen')),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                    ],
+                TextField(
+                  onTap: () {
+                    navTo(context, SearchScreen());
+                  },
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    constraints: BoxConstraints(maxHeight: 50.h, maxWidth: 347.w),
+                    fillColor: const Color(0xffEBEBEB),
+                    filled: true,
+                    hintText: S.of(context).search,
+                    hintStyle: TextStyle(fontSize: 13.sp, color: Colors.black87),
+                    prefixIcon: SizedBox(
+                      width: 10.5.w,
+                      height: 10.5.h,
+                      child: Image.asset("assets/icons/google.png"),
+                    ),
+                    border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(24), borderSide: BorderSide.none),
                   ),
                 ),
                 Container(

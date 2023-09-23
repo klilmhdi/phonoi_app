@@ -50,7 +50,8 @@ document.querySelector('#sf_submit').click()
                 status: true, message: 'Success', title: title, thumbnail: thumbnail, duration: duration, links: links);
             return vData;
           } catch (e) {
-            return VideoData(status: false, message: 'Please try again');
+            print(e.toString());
+            return VideoData(status: false, message: 'Please try again ${e.toString()}');
           }
         });
         res = data;

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 class AppColor {
   final ColorScheme colorScheme;
 
-  AppColor({
-    required this.colorScheme,
-  });
+  AppColor({required this.colorScheme});
 
   // Light Theme
   factory AppColor.lightTheme() {
@@ -59,25 +57,25 @@ class AppColor {
       secondaryContainer: Colors.teal[700],
       onSecondaryContainer: Colors.white,
       tertiary: Colors.amber,
-      onTertiary: Colors.black,
+      onTertiary: Color(0xFF040D12),
       tertiaryContainer: Colors.amber[700],
-      onTertiaryContainer: Colors.black,
+      onTertiaryContainer: Color(0xFF040D12),
       error: Colors.red,
       onError: Colors.white,
       errorContainer: Colors.red[700],
       onErrorContainer: Colors.white,
-      background: Colors.black,
+      background: Color(0xFF040D12),
       onBackground: Colors.white,
-      surface: Colors.black,
+      surface: Color(0xFF040D12),
       onSurface: Colors.white,
       surfaceVariant: Colors.grey[800],
       onSurfaceVariant: Colors.white,
       outline: Colors.grey,
       outlineVariant: Colors.white,
-      shadow: Colors.black,
-      scrim: Colors.black.withOpacity(0.5),
+      shadow: Color(0xFF040D12),
+      scrim: Color(0xFF040D12).withOpacity(0.5),
       inverseSurface: Colors.white,
-      onInverseSurface: Colors.black,
+      onInverseSurface: Color(0xFF040D12),
       inversePrimary: Colors.blue,
       surfaceTint: Colors.deepOrange[700],
     ));

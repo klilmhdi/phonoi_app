@@ -32,14 +32,10 @@ class AddLinkCubit extends Cubit<AddLinkState> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel? userModel;
   VideoDownloadModel? videoDownloadModel;
-  DownloadNotification flutterLocalNotificationsPlugin = DownloadNotification();
-
-  // GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // DownloadNotification flutterLocalNotificationsPlugin = DownloadNotification();
 
   // for getBrandIcon function but it in void function
-  void updateVideoType(VideoType videoType) {
-    emit(getBrandIcon(videoType) as AddLinkState);
-  }
+  void updateVideoType(VideoType videoType) => emit(getBrandIcon(videoType) as AddLinkState);
 
   // get the type of link
   dynamic getBrandIcon(VideoType videoType) {
@@ -125,12 +121,6 @@ class AddLinkCubit extends Cubit<AddLinkState> {
           pathVideo,
           onReceiveProgress: (received, total) {
             if (total != -1) {
-              // DownloadNotification.showProgressNotification(
-              //   maxProgress: 100,
-              //   title: "Downlaoding your video link...",
-              //   body: pathVideo,
-              //   progress: state.progressValue.toInt(),
-              // );
               emit(state.copyWith(progressValue: (received / total * 100), fileName: pathVideo));
             }
           },
@@ -149,8 +139,7 @@ class AddLinkCubit extends Cubit<AddLinkState> {
           //     title: "Downloading successfull!!", body: "Your video link is completing!!");
           await Future.delayed(Duration(milliseconds: 500));
           // await showSuccessSnackBar(S.of(context).downloading_completed, 2, context);
-          await uploadToFirebaseStorage(context, url)
-              .then((value) => showSuccessSnackBar(S.of(context).downloading_completed, 2, context));
+          await uploadToFirebaseStorage(context, url);
         });
       } on DioException catch (e) {
         emit(state.copyWith(videoType: VideoType.non, isDownloading: false, qualities: [], video: null));
@@ -337,7 +326,7 @@ class AddLinkCubit extends Cubit<AddLinkState> {
                           await performDownloading(state.qualities![state.selectedQualityIndex].url!, context)
                               .then((value) {
                             uploadToFirebaseStorage(context, state.video!.title)
-                                .then((value) => showSnackBar("success", 2, context))
+                                .then((value) => showSuccessSnackBar(S.of(context).downloading_completed, 2, context))
                                 .catchError((onError) => print(onError.toString()));
                           }).catchError((error) => print(error.toString()));
                         }

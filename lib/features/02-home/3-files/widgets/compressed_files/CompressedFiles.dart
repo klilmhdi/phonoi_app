@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class CompressedFiles extends StatefulWidget {
   const CompressedFiles({super.key});
 
@@ -33,7 +35,7 @@ class _CompressedFilesState extends State<CompressedFiles> {
           ),
         ],
         title: Text(
-          ' الملفات المضغوطة',
+          S.of(context).compreseds,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
@@ -55,8 +57,8 @@ class _CompressedFilesState extends State<CompressedFiles> {
           SizedBox(height: 60),
           Center(
             child: Text(
-              "لا يوجد ملفات مضغوطة",
-              style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500),
+              S.of(context).no_compressed,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
           )
         ],

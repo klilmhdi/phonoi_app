@@ -1291,6 +1291,56 @@ class S {
       args: [],
     );
   }
+
+  /// `There are no applications`
+  String get no_apps {
+    return Intl.message(
+      'There are no applications',
+      name: 'no_apps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no file compressed`
+  String get no_compressed {
+    return Intl.message(
+      'There are no file compressed',
+      name: 'no_compressed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no files`
+  String get no_files {
+    return Intl.message(
+      'There are no files',
+      name: 'no_files',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Videos Player`
+  String get video {
+    return Intl.message(
+      'Videos Player',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image Gallery`
+  String get image {
+    return Intl.message(
+      'Image Gallery',
+      name: 'image',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

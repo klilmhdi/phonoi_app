@@ -89,7 +89,6 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            color: Colors.black,
                             border: Border.all(
                               color: const Color(0xff9B9B9B),
                               width: 1,
@@ -114,9 +113,12 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                     ),
                   );
                 } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.deepPurple,
+                  return Expanded(
+                    flex: 6,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.deepPurple,
+                      ),
                     ),
                   );
                 }
@@ -136,7 +138,13 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                                 child: CachedNetworkImage(imageUrl: "${data['thumbnail']}"),
                               ),
                               title: Text(data['title'] ?? "khaleel@gmail.com"),
-                              subtitle: Text(data['video'] == "Video" ? S.of(context).videos : S.of(context).musics ?? "Video"),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(data['video'] == "Video" ? S.of(context).videos : S.of(context).musics ?? "Video"),
+                                  Text(data['createdAt'].toString()),
+                                ],
+                              ),
                             );
                           },
                           itemCount: snapshot.data!.docs.length,

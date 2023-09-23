@@ -123,5 +123,10 @@
   "arab": "Arabic",
   "engl": "English",
   "change_theme": "Change theme",
-  "select_lang": "Select Language"
+  "select_lang": "Select Language",
+  "no_apps": "There are no applications",
+  "no_compressed": "There are no file compressed",
+  "no_files": "There are no files",
+  "video": "Videos Player",
+  "image": "Image Gallery"
 }

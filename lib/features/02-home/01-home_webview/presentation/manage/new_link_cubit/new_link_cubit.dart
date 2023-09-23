@@ -18,7 +18,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../../../core/enums/music_types.dart';
 import '../../../../../../core/enums/video_types.dart';
-import '../../../../../../core/helpers/request_state/enum-request-state.dart';
+import '../../../../../../core/enums/enum-request-state.dart';
 import '../../../../../../core/utils/colors/colors.dart';
 import '../../../../../../core/utils/widgets/snackbars_widgets.dart';
 import '../../../../../../generated/l10n.dart';

@@ -98,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "if_you_want_download_directly": MessageLookupByLibrary.simpleMessage(
             "في حال تريد تحميل الرابط بشكل مباشر,"),
+        "image": MessageLookupByLibrary.simpleMessage("معرض الصور"),
         "input_validate": MessageLookupByLibrary.simpleMessage(
             "هذا الحقل فارغ , برجاء ملء هذا الحقل"),
         "insta": MessageLookupByLibrary.simpleMessage("إنستجرام"),
@@ -127,6 +128,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("الإسم كاملاً"),
         "name_input_validate": MessageLookupByLibrary.simpleMessage(
             "الرجاء اكتب الإسم بشكل صحيح!!"),
+        "no_apps": MessageLookupByLibrary.simpleMessage("لا توجد تطبيقات"),
+        "no_compressed":
+            MessageLookupByLibrary.simpleMessage("لا توجد ملفات مضغوطة"),
+        "no_files": MessageLookupByLibrary.simpleMessage("لا توجد ملفات"),
         "no_musics": MessageLookupByLibrary.simpleMessage("لا يوجد مويسقى!!"),
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "ok": MessageLookupByLibrary.simpleMessage("موافق"),
@@ -186,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحقق باستخدام البريد"),
         "using_phone":
             MessageLookupByLibrary.simpleMessage("تحقق باستخدام رقم الهاتف"),
+        "video": MessageLookupByLibrary.simpleMessage("مقاطع الفيديوهات"),
         "video_option":
             MessageLookupByLibrary.simpleMessage("فيديو (أعلى جودة)"),
         "videos": MessageLookupByLibrary.simpleMessage("فيديوهات"),

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../01-auth/models/user_model.dart';
 import '../../../01-home_webview/presentation/view/home_screen.dart';
 import '../../../2-games_suggestions/presentation/view/explore_screen.dart';
 import '../../../3-files/view/files_screen.dart';
@@ -13,6 +15,8 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
 
   static AppLayoutCubit get(context) => BlocProvider.of(context);
 
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel? userModel;
   int currentIndex = 0;
   // List<Widget> screens = [HomeScreen(), ExploreScreen(), FilesScreen(), OpenTabsScreen(), SettingsScreen()];
   List<Widget> screens = [HomeScreen(), ExploreScreen(), FilesScreen(), SettingsScreen()];

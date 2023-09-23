@@ -10,6 +10,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class GalleryViewerScreen extends StatefulWidget {
   @override
   _GalleryViewerScreenState createState() => _GalleryViewerScreenState();
@@ -131,7 +133,7 @@ class _GalleryViewerScreenState extends State<GalleryViewerScreen> {
           ),
         ),
         title: Text(
-          ' معرض الصور',
+          S.of(context).image,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

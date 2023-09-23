@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../generated/l10n.dart';
 
 class GetApp extends StatefulWidget {
   const GetApp({super.key});
@@ -34,9 +35,8 @@ class _GetAppState extends State<GetApp> {
           ),
         ],
         title: Text(
-          '  التطبيقات',
-          style: TextStyle(
-              fontSize: 20, color: Colors.black, fontWeight: FontWeight.w500),
+          S.of(context).apps,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
       ),
@@ -53,15 +53,12 @@ class _GetAppState extends State<GetApp> {
                 color: Colors.green.shade400,
               ),
             ),
-          ),SizedBox(height: 60),
+          ),
+          SizedBox(height: 20),
           Center(
             child: Text(
-              "لا توجد تطبيقات",
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500
-              ),
+              S.of(context).no_apps,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
           )
         ],

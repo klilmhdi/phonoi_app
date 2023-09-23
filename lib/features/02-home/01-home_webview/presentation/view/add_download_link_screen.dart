@@ -311,15 +311,12 @@
 //     );
 //   }
 // }
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:phonoi_app/core/utils/notification/download_notification.dart';
 
 import '../../../../../core/enums/video_types.dart';
 import '../../../../../core/utils/colors/colors.dart';
@@ -334,17 +331,10 @@ class AddLinkDownloadedScreen extends StatefulWidget {
   State<AddLinkDownloadedScreen> createState() => _AddLinkDownloadedScreenState();
 }
 
-class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
-  // final FlutterLocalNotificationsPlugin plugin = FlutterLocalNotificationsPlugin();
-
-  @override
-  void initState() {
-    super.initState();
-    // DownloadNotification.init();
-  }
-
+class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider(
       create: (context) => AddLinkCubit(),
       child: BlocConsumer<AddLinkCubit, AddLinkState>(
@@ -512,7 +502,7 @@ class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
                   SizedBox(height: 20.h),
                   state.isLoading
                       ? Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(color: Colors.deepPurple),
                         )
                       : !linkCubit.state.isDownloading
                           ? (linkCubit.state.qualities != null && linkCubit.state.qualities!.isNotEmpty)
@@ -580,12 +570,21 @@ class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
                                           fontWeight: FontWeight.w300,
                                         ),
                                       ),
+                                      // SizedBox(height: 6.h),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.all(8.0),
+                                      //   child: Marquee(
+                                      //     text: state.fileName,
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                 ],
                               ),
                               SizedBox(height: 6.h),
                               LinearProgressIndicator(
+                                color: Colors.deepPurple,
                                 value: (linkCubit.state.progressValue / 100),
                                 minHeight: 6.h,
                               ),
@@ -607,4 +606,8 @@ class _AddLinkDownloadedScreenState extends State<AddLinkDownloadedScreen> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

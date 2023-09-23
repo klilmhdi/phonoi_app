@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phonoi_app/core/utils/functions/functions.dart';
+import 'package:phonoi_app/features/02-home/0-layout/view/layout.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 600));
     fadeAnimation = Tween<double>(begin: .2, end: 1).animate(_animationController!);
     _animationController?.repeat(reverse: true);
-    Future.delayed(const Duration(seconds: 4), () => Navigator.pushReplacementNamed(context, '/layout'));
+    Future.delayed(const Duration(seconds: 4), () => navToWithLTRAnimation(context, Layout()));
   }
 
   @override
@@ -30,11 +32,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsetsDirectional.only(start: 39.w, end: 38.w, top: 246.h),
-        child: Column(
-          children: [
-            FadeTransition(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Container(
+            width: double.infinity,
+            child: FadeTransition(
               opacity: fadeAnimation!,
               child: SizedBox(
                 height: 298.h,
@@ -42,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: Image.asset('assets/app_icons/phonx.png'),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

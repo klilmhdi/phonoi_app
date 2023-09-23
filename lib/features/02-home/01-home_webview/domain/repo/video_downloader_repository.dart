@@ -6,11 +6,7 @@ import '../../data/models/video_downloaded_model.dart';
 class VideoDownloaderRepository {
   Future<VideoDownloadModel> call(String url) async {
     dynamic response = await Extractor.getDirectLink(link: url);
-    if (response != null &&
-        response.links != null &&
-        response.links!.isNotEmpty &&
-        response.title != null &&
-        response.thumbnail!.isNotEmpty) {
+    if (response != null && response.links != null && response.links!.isNotEmpty && response.title != null && response.thumbnail!.isNotEmpty) {
       print("###############################Come on here");
       print("###############################response.title = ${response.title}");
       return VideoDownloadModel(
@@ -27,6 +23,7 @@ class VideoDownloaderRepository {
       );
     } else {
       print("###############################Emptyyyyyyyyyy!!!!!!");
+      print("###############################response.title = ${response.title}");
       return VideoDownloadModel.empty();
     }
   }

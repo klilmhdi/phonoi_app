@@ -10,6 +10,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class VideoView extends StatefulWidget {
   @override
   _VideoViewState createState() => _VideoViewState();
@@ -113,7 +115,7 @@ class _VideoViewState extends State<VideoView> {
           ),
         ),
         title: Text(
-          'مقاطع الفيديو',
+          S.of(context).video,
           style: TextStyle(fontSize: 20, color: Colors.black),
         ),
         centerTitle: true,
