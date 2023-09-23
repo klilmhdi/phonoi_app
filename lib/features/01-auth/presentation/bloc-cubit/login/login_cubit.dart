@@ -44,8 +44,61 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   // sign in with facebook
-  Future<void> signInWithFacebook(context) async {}
+  Future<void> signInWithFacebook(context) async {
+    emit(LoadingSignInWithFacebookState());
+    try {
+      AuthController.signUpWithFacebook().then((value) {
+        FirebaseFirestore.instance.collection("users").doc(value.user!.uid).set({
+          'name': value.user!.displayName,
+          'email': value.user!.email,
+          'phone': value.user!.phoneNumber,
+          'uid': value.user!.uid,
+          'videos': [],
+          'createdAt': Timestamp.now(),
+        });
+        Navigator.pushReplacementNamed(context, '/out_boarding_screen');
+        emit(SuccessSignInWithFacebookState());
+      });
+    } on FirebaseException catch (error) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await showSnackBar("الحساب دا موجود قبل كدة ${error.message}", 3, context);
+        emit(ErrorSignInWithFacebookState("####################${error.toString()}"));
+      });
+    } catch (e) {
+      print("Error signing in with Facebook: $e");
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await showSnackBar("في مشكلة ${e.toString()}", 3, context);
+        emit(ErrorSignInWithFacebookState("%%%%%%%%%%%%%%%%%${e.toString()}"));
+      });
+    }
+  }
 
   // sign in with twitter
-  Future<void> signInWithTwitter(context) async {}
+  Future<void> signInWithTwitter(context) async {
+    emit(LoadingSignInWithTwitterState());
+    try {
+      AuthController.signUpWithTwitter().then((value) {
+        FirebaseFirestore.instance.collection("users").doc(value.user!.uid).set({
+          'name': value.user!.displayName,
+          'email': value.user!.email,
+          'phone': value.user!.phoneNumber,
+          'uid': value.user!.uid,
+          'videos': [],
+          'createdAt': Timestamp.now(),
+        });
+        Navigator.pushReplacementNamed(context, '/out_boarding_screen');
+        emit(SuccessSignInWithTwitterState());
+      });
+    } on FirebaseException catch (error) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await showSnackBar("الحساب دا موجود قبل كدة ${error.message}", 3, context);
+        emit(ErrorSignInWithTwitterState("####################${error.toString()}"));
+      });
+    } catch (e) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await showSnackBar("في مشكلة ${e.toString()}", 3, context);
+        emit(ErrorSignInWithTwitterState("%%%%%%%%%%%%%%%%%${e.toString()}"));
+      });
+    }
+  }
 }

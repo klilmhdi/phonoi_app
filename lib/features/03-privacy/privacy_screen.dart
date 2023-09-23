@@ -10,7 +10,6 @@ class PrivacyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffC4C4C4),
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: SafeArea(

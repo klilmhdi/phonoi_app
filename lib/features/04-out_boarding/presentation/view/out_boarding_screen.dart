@@ -32,110 +32,113 @@ class _OutBoardingScreenState extends State<OutBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 120.h,
-                width: 160.w,
-                child: Image.asset('assets/app_icons/phonx.png'),
-              ),
-              Container(
-                height: 149.h,
-                width: 346.w,
-                decoration: BoxDecoration(
-                  color: const Color(0xff8C52FF),
-                  borderRadius: BorderRadius.circular(16),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 120.h,
+                  width: 160.w,
+                  child: Image.asset('assets/app_icons/phonx.png'),
                 ),
-                child: PageView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _pageController,
-                  onPageChanged: (int value) {
-                    setState(() {
-                      _pageIndex = value;
-                    });
-                  },
+                Container(
+                  height: 149.h,
+                  width: 346.w,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff8C52FF),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: PageView(
+                    physics: const BouncingScrollPhysics(),
+                    controller: _pageController,
+                    onPageChanged: (int value) {
+                      setState(() {
+                        _pageIndex = value;
+                      });
+                    },
+                    children: [
+                      OutBoardingPage(
+                        text: S.of(context).on_boarding_1,
+                        pageIndex: _pageIndex,
+                        pageController: _pageController,
+                      ),
+                      OutBoardingPage(
+                        text: S.of(context).on_boarding_2,
+                        pageIndex: _pageIndex,
+                        pageController: _pageController,
+                      ),
+                      OutBoardingPage(
+                        text: S.of(context).on_boarding_3,
+                        pageIndex: _pageIndex,
+                        pageController: _pageController,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    OutBoardingPage(
-                      text: S.of(context).on_boarding_1,
-                      pageIndex: _pageIndex,
-                      pageController: _pageController,
+                    TabPageSelectorIndicator(
+                      backgroundColor: _pageIndex == 0 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
+                      borderColor: Colors.transparent,
+                      size: 10.sp,
                     ),
-                    OutBoardingPage(
-                      text: S.of(context).on_boarding_2,
-                      pageIndex: _pageIndex,
-                      pageController: _pageController,
+                    SizedBox(width: 5.w),
+                    TabPageSelectorIndicator(
+                      backgroundColor: _pageIndex == 1 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
+                      borderColor: Colors.transparent,
+                      size: 10.sp,
                     ),
-                    OutBoardingPage(
-                      text: S.of(context).on_boarding_3,
-                      pageIndex: _pageIndex,
-                      pageController: _pageController,
+                    SizedBox(width: 5.w),
+                    TabPageSelectorIndicator(
+                      backgroundColor: _pageIndex == 2 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
+                      borderColor: Colors.transparent,
+                      size: 10.sp,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 8.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TabPageSelectorIndicator(
-                    backgroundColor: _pageIndex == 0 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
-                    borderColor: Colors.transparent,
-                    size: 10.sp,
+                SizedBox(height: 28.h),
+                SizedBox(
+                  height: 216.h,
+                  width: 216.w,
+                  child: Image.asset('assets/icons/tree.png'),
+                ),
+                SizedBox(height: 32.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 45.w),
+                  child: SizedBox(
+                    child: Text(
+                      S.of(context).desc_on_boarding,
+                      style: TextStyle(fontSize: 12.sp),
+                      // textDirection: TextDirection.rtl,
+                    ),
                   ),
-                  SizedBox(width: 5.w),
-                  TabPageSelectorIndicator(
-                    backgroundColor: _pageIndex == 1 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
-                    borderColor: Colors.transparent,
-                    size: 10.sp,
+                ),
+                SizedBox(height: 30.h),
+                ElevatedButton(
+                  onPressed: () {
+                    navAndFinish(context, Layout());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff8C52FF),
+                    minimumSize: Size(96.w, 38.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
-                  SizedBox(width: 5.w),
-                  TabPageSelectorIndicator(
-                    backgroundColor: _pageIndex == 2 ? const Color(0xff7B3FF0) : const Color(0xffDCDCDC),
-                    borderColor: Colors.transparent,
-                    size: 10.sp,
-                  ),
-                ],
-              ),
-              SizedBox(height: 28.h),
-              SizedBox(
-                height: 216.h,
-                width: 216.w,
-                child: Image.asset('assets/icons/tree.png'),
-              ),
-              SizedBox(height: 32.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.w),
-                child: SizedBox(
                   child: Text(
-                    S.of(context).desc_on_boarding,
-                    style: TextStyle(fontSize: 12.sp),
-                    // textDirection: TextDirection.rtl,
+                    S.of(context).start,
+                    style: TextStyle(fontSize: 17.sp, color: Colors.white),
                   ),
                 ),
-              ),
-              SizedBox(height: 30.h),
-              ElevatedButton(
-                onPressed: () {
-                  navAndFinish(context, Layout());
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff8C52FF),
-                  minimumSize: Size(96.w, 38.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  S.of(context).start,
-                  style: TextStyle(fontSize: 17.sp, color: Colors.white),
-                ),
-              ),
-            ],
+                SizedBox(height: 10.h),
+              ],
+            ),
           ),
         ),
       ),

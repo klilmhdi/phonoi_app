@@ -46,11 +46,11 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: GestureDetector(
                 onTap: () => showSnackBar(S.of(context).we_develop_it, 3, context),
                 child: Container(
-                  height: 87,
+                  // height: double.maxFinite,
                   width: double.infinity,
                   decoration: BoxDecoration(color: Color(0xffCAD6FF), borderRadius: BorderRadius.circular(12)),
                   child: Column(
@@ -80,7 +80,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
                   return Expanded(
-                    flex: 6,
+                    flex: 9,
                     child: Column(
                       children: [
                         SizedBox(height: 26),
@@ -114,7 +114,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                   );
                 } else if (snapshot.connectionState == ConnectionState.waiting) {
                   return Expanded(
-                    flex: 6,
+                    flex: 9,
                     child: Center(
                       child: CircularProgressIndicator(
                         backgroundColor: Colors.deepPurple,
@@ -122,9 +122,8 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                     ),
                   );
                 }
-
                 return Expanded(
-                  flex: 6,
+                  flex: 9,
                   child: Center(
                     child: Container(
                         width: double.infinity,
@@ -141,7 +140,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(data['video'] == "Video" ? S.of(context).videos : S.of(context).musics ?? "Video"),
+                                  Text(data['video'] == "Video" ? S.of(context).videos : S.of(context).musics),
                                   Text(data['createdAt'].toString()),
                                 ],
                               ),
